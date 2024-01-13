@@ -14,3 +14,4 @@ print(modeDirect(name_movie))
 def modeSearch(movie:str):
     return '?s=' + (movie.lower().replace(' ','+'));
     
+# Colocar alguma coisa para indentificar quando um rota é diferente da padrão
