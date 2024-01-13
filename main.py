@@ -10,3 +10,7 @@ def modeDirect(movie:str):
     return movie.lower().replace(' ','-');
 
 print(modeDirect(name_movie))
+
+def modeSearch(movie:str):
+    return '?s=' + (movie.lower().replace(' ','+'));
+    
