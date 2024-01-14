@@ -7,11 +7,11 @@ from bs4 import BeautifulSoup
 name_movie = 'Tempos Modernos'
 
 def modeDirect(movie:str):
-    return movie.lower().replace(' ','-');
+    return movie.lower().replace(' ','-')
 
 print(modeDirect(name_movie))
 
 def modeSearch(movie:str):
-    return '?s=' + (movie.lower().replace(' ','+'));
+    return '?s=' + (movie.lower().replace(' ','+'))
     
 # Colocar alguma coisa para indentificar quando um rota é diferente da padrão
