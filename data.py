@@ -1,18 +1,22 @@
-movies = {
+movies = [
     {
-        "Mega Filmes HD": "https://www.megafilmeshds.net/",
+        "name": "Mega Filmes HD",
+        "link": "https://www.megafilmeshds.net/?s=",
         "division_url":"%20"
     },
     {
-        "Filmes Online X": "https://filmesonlinexx.com/movies/",
+        "name": "Filmes Online X",
+        "link": "https://filmesonlinexx.com/movies/",
         "division_url":"+"
     },
     {
-        "Filmes Online Grátis": "https://filmesonlinegratis.xyz/movies/",
+        "name": "Filmes Online Grátis",
+        "link": "https://filmesonlinegratis.xyz/movies/",
         "division_url":"+"
     },
     {
-        "Topflix": " https://topflix.sh/filmes/assistir-online-",
+        "name": "Topflix",
+        "link": "https://topflix.sh/filmes/assistir-online-",
         "division_url":"+"
     },
-}
+]
