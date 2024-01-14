@@ -5,14 +5,16 @@ from bs4 import BeautifulSoup
 #response = requests.get('https://topflix.sh/filmes/assistir-online-asdgni435/')
 #print(response.url) para saber se a rota gerada foi para 404
 
-name_movie = str(input('Nome do filme'))
+name_movie = str(input('Nome do filme:'))
 
 def movieDirect(movie:str):
-    link_movie = 
-    return movie.lower().replace(' ','-')
+    links = []
+    for link in movies:
+        mod_movie = movie.lower().strip().replace(' ',link['division_url'])
+        movie_route = link['link'] + mod_movie
+        links.append(movie_route)
+    return links
 
-def modeSearch(movie:str):
-    return '?s=' + (movie.lower().replace(' ','+'))
     
 # Colocar alguma coisa para indentificar quando um rota é diferente da padrão
 
