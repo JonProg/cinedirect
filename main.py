@@ -7,6 +7,9 @@ from bs4 import BeautifulSoup
 
 name_movie = str(input('Nome do filme:'))
 
+def validLink(link): # Para saber se a rota gerada foi 404
+    pass
+
 def movieDirect(movie:str):
     links = []
     for link in movies:
