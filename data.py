@@ -19,4 +19,9 @@ movies = [
         "link": "https://topflix.sh/filmes/assistir-online-",
         "division_url":"+"
     },
+    {
+        "name": "LoveFlix",
+        "link": "https://www.loveflix.black/search/",
+        "division_url":"%20"
+    },
 ]
