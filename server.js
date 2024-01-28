@@ -19,10 +19,6 @@ app.use(flash());
 app.set('views', path.resolve(__dirname,'src','views'));
 app.set('view engine','ejs'); //Serve para adicinar a logica do js no html
 
-//Utilizando um middleware global que é ativado toda vez que uma requisão é feita
-app.use(middlewareGlobal);
-app.use(checkCsrfError);
-app.use(csrfMiddleware);
 app.use(routes);
  
 
