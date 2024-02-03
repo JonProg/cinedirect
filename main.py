@@ -24,3 +24,4 @@ def movieDirect(movie:str):
 # Colocar alguma coisa para indentificar quando um rota é diferente da padrão
 
 print(movieDirect(name_movie))
+
