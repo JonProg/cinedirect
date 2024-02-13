@@ -5,8 +5,6 @@ from bs4 import BeautifulSoup
 response = requests.get('https://topflix.sh/filmes/assistir-online-asdgni435/')
 #print(response.url) para saber se a rota gerada foi para 404
 
-#saber se no body da pagina tem <ul> caso tenha significa que tem filme
-
 name_movie = str(input('Nome do filme:'))
 
 def validLink(link): # Para saber se a rota gerada foi 404
