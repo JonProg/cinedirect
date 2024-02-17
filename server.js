@@ -13,9 +13,6 @@ fazendo com que pareça que as views estão dentro da pasta public facilitando
 na hora de colocar os caminhos dos aquivos estáticos
 */
 
-app.use(sessionOptions);
-app.use(flash());
-
 app.set('views', path.resolve(__dirname,'src','views'));
 app.set('view engine','ejs'); //Serve para adicinar a logica do js no html
 
