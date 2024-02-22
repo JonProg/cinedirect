@@ -1,25 +1,25 @@
 import express from 'express';
+import homeRoutes from './src/routes/homeRoutes';
+import {resolve} from 'path';
 
-import homeRoutes from './src/controllers/homeController';
-
-class App {
+class App{
     constructor() {
       this.app = express();
       this.middlewares();
       this.routes();
     }
   
-    middlewares() {
+    middlewares(){
       this.app.use(express.urlencoded({ extended: true }));
       this.app.use(express.json());
       this.app.use(express.static(resolve(__dirname,'uploads')))
     }
   
-    routes() {
+    routes(){
       this.app.use('/', homeRoutes);
     }
   
   }
   
-export default new App().app;
+    export default new App().app;
 
