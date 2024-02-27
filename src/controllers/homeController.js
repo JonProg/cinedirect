@@ -12,9 +12,8 @@ class HomeController{
 
     async submit(req,res){
         const inputValue = req.body.inputName;
-        process.env.API_KEY
         try {
-            const response = await axios.get('https://api.themoviedb.org/3/authentication')
+            const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${inputValue}`)
             console.log(response.data);
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
