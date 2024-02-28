@@ -3,6 +3,9 @@ import axios from 'axios'
 
 dotenv.config()
 
+const serchURL = process.env.API_SEARCH;
+const apiKey = process.env.API_KEY;
+
 class HomeController{
     async index(req,res){
         res.render('index');
@@ -11,7 +14,7 @@ class HomeController{
     async submit(req,res){
         const inputValue = req.body.inputName;
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${inputValue}`)
+            const response = await axios.get(`${serchURL}?${apiKey}&query=${inputValue}`)
             console.log(response.data);
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
