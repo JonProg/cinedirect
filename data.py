@@ -1,8 +1,8 @@
 movies = [
     {
         "name": "Mega Filmes HD",
-        "link": "https://www.megafilmeshds.net/?s=",
-        "division_url":"%20"
+        "link": "https://www.megafilmeshds.net/",
+        "division_url":"-"
     },
     {
         "name": "Filmes Online X",
@@ -17,6 +17,6 @@ movies = [
     {
         "name": "Topflix",
         "link": "https://topflix.sh/filmes/assistir-online-",
-        "division_url":"+"
+        "division_url":"-"
     },
 ]
