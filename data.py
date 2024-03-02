@@ -7,16 +7,16 @@ movies = [
     {
         "name": "Filmes Online X",
         "link": "https://filmesonlinexx.com/movies/",
-        "division_url":"+"
+        "division_url":"-"
     },
     {
         "name": "Filmes Online Grátis",
         "link": "https://filmesonlinegratis.xyz/movies/",
-        "division_url":"+"
+        "division_url":"-"
     },
     {
         "name": "Topflix",
-        "link": "https://topflix.sh/filmes/assistir-online-",
+        "link": "https://topflix.vc/filmes/assistir-online-",
         "division_url":"-"
     },
 ]
