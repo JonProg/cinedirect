@@ -7,6 +7,7 @@ class App{
       this.app = express();
       this.middlewares();
       this.routes();
+      this.setters();
     }
   
     middlewares(){
@@ -17,6 +18,11 @@ class App{
   
     routes(){
       this.app.use('/', homeRoutes);
+    }
+
+    setters(){
+      this.app.set('views', resolve(__dirname,'src','views'));
+      this.app.set('view engine','ejs'); //Serve para adicinar a logica do js no html
     }
   
   }
