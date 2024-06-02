@@ -6,7 +6,9 @@ class HomeController{
     };
 
     async submit(req,res){
-
+        const inputValue = req.body.inputName;
+        console.log(inputValue)
+        res.render('index')
     };
 }
 
