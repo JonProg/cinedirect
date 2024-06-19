@@ -19,7 +19,6 @@ class HomeController{
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
         }
-        console.log(inputValue)
         res.render('index')
     };
 }
