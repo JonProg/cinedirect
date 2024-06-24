@@ -7,22 +7,24 @@
     <title>CineDirect</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row justify-content-center align-items-center mt-5">
-              <div class="col-md-4">
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center mt-5">
+            <div class="col-md-4">
                 <h1 class="text-center mb-1 display-5">CineDirect</h1>
                 <form action="/submit" method="post" class="container mt-5">
-                    <div class="input-group col-md-">
-                      <input type="text" class="form-control" name="inputName" placeholder="Nome do Filme...">
-                      <div class="input-group-append">
-                        <button class="btn btn-primary ml-5 mb-1" type="submit">Buscar</button>
-                      </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="inputName" placeholder="Nome do Filme...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary ms-3 mb-1" type="submit">Buscar</button>
+                        </div>
                     </div>
                 </form>
-              </div>
             </div>
-          </div>
-        <%- include('includes/footer') %>
-    </body>
+        </div>
+    </div>
+    <%- include('includes/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eB6fD+Xjl0mUasE9thquWa7oN1yAnPY6ndYMLLRxyVHRoLl4SmV/BJJ3zFe14cfz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-QpD9+gpKKb0W59bR9SKLByX4W9u2KN7V1LpYoV/j7HUb8REg8FnKk4tqld1ltcfw" crossorigin="anonymous"></script>
+</body>
 </html>
