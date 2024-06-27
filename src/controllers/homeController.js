@@ -14,7 +14,7 @@ class HomeController{
     async submit(req,res){
         const inputValue = req.body.inputName;
         try {
-            const response = await axios.get(`${serchURL}${apiKey}&query=${inputValue}`)
+            const response = await axios.get(`${serchURL}${apiKey}&query=${inputValue}&include_adult=false&language=pt-BR`)
             console.log(response.data);
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
