@@ -20,15 +20,6 @@
                         </div>
                     </div>
                 </form>
-                <% if (movies) { %>
-                    <% for (const movie of movies) { %>
-                        <h4><% movie['results'][0]['title'] %></h4>
-                        <h4><% movie['results'][0]['release_date'] %></h4>
-                    <% } %>
-                <% }else {%>
-                    <h4>Pesquise um filme</h4>
-                <% } %>
-
             </div>
         </div>
     </div>
