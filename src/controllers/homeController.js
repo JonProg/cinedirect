@@ -5,19 +5,17 @@ dotenv.config()
 
 const serchURL = process.env.API_SEARCH;
 const apiKey = process.env.API_KEY;
-let movies = [];
 
 class HomeController{
     async index(req,res){
-        res.render('index', {movies});
+        res.render('index');
     };
 
     async submit(req,res){
         const inputValue = req.body.inputName;
         try {
             const response = await axios.get(`${serchURL}${apiKey}&query=${inputValue}&include_adult=false&language=pt-BR`)
-            movies = response.data.results.slice(0,10)
-            console.log(movies)
+            console.log(response.data.results.slice(0,10))
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
         }
