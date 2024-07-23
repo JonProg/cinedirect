@@ -8,7 +8,7 @@ const apiKey = process.env.API_KEY;
 
 class HomeController{
     async index(req,res){
-        res.render('index');
+        res.render('index',{movies: false});
     };
 
     async submit(req,res){
