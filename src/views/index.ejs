@@ -24,7 +24,7 @@
         </div>
     </div>
     <% if (movies) { %>
-        <%for (const movie in movies) { %>
+        <%for (const movie of movies) { %>
             <p><%= movie.title %></p>
         <%}%>
     <% } else { %>

@@ -16,9 +16,6 @@ class HomeController{
         try {
             const response = await axios.get(`${serchURL}${apiKey}&query=${inputValue}&include_adult=false&language=pt-BR`)
             var movies = response.data.results.slice(0,10);
-            for (const movie of movies) {
-                console.log(movie.title)
-            }
             res.render('index', {movies})
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
