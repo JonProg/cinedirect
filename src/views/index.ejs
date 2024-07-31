@@ -27,8 +27,9 @@
         <%for (const movie of movies) { %>
             <p><%= movie.title %></p>
             <img src="<%= movie.poster_path %>" alt="poster <%= movie.title %>">
+            <hr>
         <%}%>
-    <% } else { %>
+    <% } else { %>.
         <h4>Faça uma pesquisa</h4>
     <%}%>
     <%- include('includes/footer') %>
