@@ -26,7 +26,7 @@
     <% if (movies) { %>
         <%for (const movie of movies) { %>
             <p><%= movie.title %></p>
-            <img src="<%= movie.poster_path %>" alt="">
+            <img src="<%= movie.poster_path %>" alt="poster <%= movie.title %>">
         <%}%>
     <% } else { %>
         <h4>Faça uma pesquisa</h4>
