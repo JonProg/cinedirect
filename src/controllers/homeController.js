@@ -5,6 +5,7 @@ dotenv.config()
 
 const serchURL = process.env.API_SEARCH;
 const apiKey = process.env.API_KEY;
+const imgURL = process.env.API_IMG
 
 class HomeController{
     async index(req,res){

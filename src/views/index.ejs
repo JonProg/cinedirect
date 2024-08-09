@@ -26,7 +26,7 @@
     <% if (movies) { %>
         <%for (const movie of movies) { %>
             <p><%= movie.title %></p>
-            <img src="<%= movie.poster_path %>" alt="poster <%= movie.title %>">
+            <img src="https://image.tmdb.org/t/p/w200/<%= movie.poster_path %>" alt="poster <%= movie.title %>">
             <hr>
         <%}%>
     <% } else { %>.
