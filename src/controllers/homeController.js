@@ -26,6 +26,7 @@ class HomeController{
 
             var movies = response.data.results
             .filter(movie => movie.poster_path !== null)
+            .filter(movie => movie.popularity >= 17)
             .filter(movie => Number(movie.release_date.slice(0,4)) >= 1999)
             .slice(0,10);
 
