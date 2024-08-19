@@ -19,7 +19,7 @@ class App{
   
     routes(){
       this.app.use('/', homeRoutes);
-      this.app.use('/movie/', homeRoutes);
+      this.app.use('/movie/', movieRoutes);
     }
 
     setters(){

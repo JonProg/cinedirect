@@ -3,13 +3,25 @@ import axios from 'axios'
 
 dotenv.config()
 
-const serchURL = process.env.API_SEARCH;
+const apiMovie = process.env.API_MOVIE;
 const apiKey = process.env.API_KEY;
 const imgURL = process.env.API_IMG;
 
 class MovieController{
     async index(req,res){
-        res.render('index',{movies: false});
+        const params = {
+            "api_key": apiKey,
+            "include_adult": false,
+            "language":"pt-BR"
+        }
+        try {
+            const movie = await axios.get(`${apiMovie}${req.params.id}`,{params:params})
+            console.log(movie)
+            
+        } catch (error) {
+            console.error('Erro ao fazer a requisição GET:', error);
+            res.render('movie',{movies: false});
+        }
     };
 }
 
