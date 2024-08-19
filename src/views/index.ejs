@@ -25,8 +25,11 @@
     </div>
     <% if (movies) { %>
         <%for (const movie of movies) { %>
+            <a href="/" target="_blank" rel="noopener noreferrer">
+                <img src="<%= imgURL %><%= movie.poster_path %>" alt="poster <%= movie.title %>">
+            </a>
             <p><%= movie.title %></p>
-            <img src="<%= imgURL %><%= movie.poster_path %>" alt="poster <%= movie.title %>">
+            <p><%= movie.release_date %></p>
             <hr>
         <%}%>
     <% } else { %>

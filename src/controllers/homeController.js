@@ -14,10 +14,23 @@ class HomeController{
 
     async submit(req,res){
         const inputValue = req.body.inputName;
+        const params = {
+            "api_key": apiKey,
+            "query":inputValue,
+            "include_adult": false,
+            "language":"pt-BR"
+        }
+
         try {
-            const response = await axios.get(`${serchURL}${apiKey}&query=${inputValue}&include_adult=false&language=pt-BR`)
-            var movies = response.data.results.slice(0,10);
+            const response = await axios.get(serchURL,{params:params})
+
+            var movies = response.data.results
+            .filter(movie => movie.poster_path !== null)
+            .filter(movie => Number(movie.release_date.slice(0,4)) >= 1999)
+            .slice(0,10);
+
             res.render('index', {movies, imgURL})
+
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
             res.render('index',{movies: false});
