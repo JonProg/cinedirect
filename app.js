@@ -1,5 +1,6 @@
 import express from 'express';
 import homeRoutes from './src/routes/homeRoutes';
+import movieRoutes from './src/routes/movieRoutes';
 import {resolve} from 'path';
 
 class App{
@@ -18,6 +19,7 @@ class App{
   
     routes(){
       this.app.use('/', homeRoutes);
+      this.app.use('/movie/', homeRoutes);
     }
 
     setters(){
