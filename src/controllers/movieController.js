@@ -15,12 +15,13 @@ class MovieController{
             "language":"pt-BR"
         }
         try {
-            const movie = await axios.get(`${apiMovie}${req.params.id}`,{params:params})
-            console.log(movie)
+            const response= await axios.get(`${apiMovie}${req.params.id}`,{params:params})
+            const movie = response.data
+            res.render('movie', {movie, imgURL})
             
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
-            res.render('movie',{movies: false});
+            res.render('movie', movie);
         }
     };
 }

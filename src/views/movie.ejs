@@ -9,6 +9,20 @@
 </head>
     <body>
         <%- include('includes/search') %>
+        <% if (movie) { %>
+            <img src="<%= imgURL %><%= movie.poster_path %>" alt="poster <%= movie.title %>">
+            <h3><%= movie.title %></h3>
+            <h5><%= movie.release_date %></h5>
+            <hr>
+            <h5><%= movie.overview %></h5>
+            <span>Gêneros:</span>
+            <%for (const genre of movie.genres) { %>
+                <span><%= genre.name%></span>
+            <%}%>
+        <% } %>
+        <hr>
+        <h5>Links para o filme:</h5>
+
         <%- include('includes/footer') %>
     </body>
 </html>
