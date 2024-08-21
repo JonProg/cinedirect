@@ -44,8 +44,8 @@ async function validLink(links){
     var responses = []
     for (const link of links) {
         try {
-            const response = await axios.get(link, { maxRedirects: 1 })
-            responses.push(response.status)
+            await axios.get(link, { maxRedirects: 1 })
+            responses.push(link)
         } catch (error) {
             responses.push(404)
         }
