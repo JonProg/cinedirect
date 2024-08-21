@@ -7,10 +7,10 @@ const links = [
         division_url:"-"
     },
     {
-        name: "Mega Filmes Gratis HD",
-        link: "https://megafilmesgratishd.com/filme/assistir-",
+        name: "Super Cine",
+        link: "https://supercine.to/filmes/assistir-",
         division_url:"-",
-        endUrl:"-dublado-online-hdd"
+        endUrl:"-online"
     },
     {
         name: "Topflix",
@@ -18,7 +18,7 @@ const links = [
         division_url:"-"
     },
     {
-        name: "Topflix",
+        name: "Mega Cine",
         link: "https://megacine.to/filmes/assistir-",
         division_url:"-",
         endUrl:"-online"
@@ -27,9 +27,11 @@ const links = [
 
 var movieLinks = []
 
-async function linkMovies(filme){
+async function linkMovies(movie){
     for (const website of links) {
-        let movieLink = `${website.link}${filme.split(' ').join(website.division_url)}`;
+        let modMovie = movie.replace(/[:]/g,"").split(' ').join(website.division_url)
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        let movieLink = `${website.link}${modMovie}`;
         if (website.endUrl) {
             movieLink += website.endUrl
         };
@@ -41,16 +43,20 @@ async function linkMovies(filme){
 async function validLink(links){
     var responses = []
     for (const link of links) {
-        const response = await axios.get(link)
-        responses.push(response.status)
+        try {
+            const response = await axios.get(link, { maxRedirects: 1 })
+            responses.push(response.status)
+        } catch (error) {
+            responses.push(404)
+        }
     }
     console.log(responses)
 }
 
 process.stdout.write('Nome do filme: ');
 process.stdin.on('data', async function(data) {
-    const filme = data.toString().trim().toLowerCase(); 
-    await linkMovies(filme)
+    const movie = data.toString().trim().toLowerCase(); 
+    await linkMovies(movie)
     await validLink(movieLinks)
     process.exit();
 });
