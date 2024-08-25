@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import axios from 'axios'
+import {validLink} from '../services/linksMovie'
 
 dotenv.config()
 
@@ -17,7 +18,9 @@ class MovieController{
         try {
             const response= await axios.get(`${apiMovie}${req.params.id}`,{params:params})
             const movie = response.data
-            res.render('movie', {movie, imgURL})
+            const links = await validLink(movie.title)
+            res.render('movie', {movie, imgURL, links})
+
             
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);

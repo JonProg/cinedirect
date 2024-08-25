@@ -8,9 +8,8 @@ const links = [
     },
     {
         name: "Super Cine",
-        link: "https://supercine.to/filmes/assistir-",
+        link: "https://supercine.to/filmes/",
         division_url:"-",
-        endUrl:"-online"
     },
     {
         name: "Topflix",
@@ -25,9 +24,9 @@ const links = [
     },
 ]
 
-var movieLinks = []
-
 async function linkMovies(movie){
+    var movieLinks = [];
+    
     for (const website of links) {
         let modMovie = movie.replace(/[:]/g,"").split(' ').join(website.division_url)
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -35,30 +34,19 @@ async function linkMovies(movie){
         if (website.endUrl) {
             movieLink += website.endUrl
         };
-        console.log(movieLink)
-        movieLinks.push(movieLink)
+        movieLinks.push(movieLink);
     }
+    return movieLinks
 }
 
-async function validLink(links){
-    var responses = []
-    for (const link of links) {
+async function validLink(movieTitle){
+    var responses = await linkMovies(movieTitle);
+    for (const [index,link] of responses.entries()) {
         try {
-            await axios.get(link, { maxRedirects: 1 })
-            responses.push(link)
+            await axios.get(link, { maxRedirects: 0 });
         } catch (error) {
-            responses.push(404)
+            responses.splice(index , 1);
         }
     }
-    console.log(responses)
+    return responses;
 }
-
-process.stdout.write('Nome do filme: ');
-process.stdin.on('data', async function(data) {
-    const movie = data.toString().trim().toLowerCase(); 
-    await linkMovies(movie)
-    await validLink(movieLinks)
-    process.exit();
-});
-
-
