@@ -39,7 +39,7 @@ async function linkMovies(movie){
     return movieLinks
 }
 
-async function validLink(movieTitle){
+export async function validLink(movieTitle){
     var responses = await linkMovies(movieTitle);
     for (const [index,link] of responses.entries()) {
         try {

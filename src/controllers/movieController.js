@@ -24,7 +24,7 @@ class MovieController{
             
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
-            res.render('movie', movie);
+            res.render('movie');
         }
     };
 }
