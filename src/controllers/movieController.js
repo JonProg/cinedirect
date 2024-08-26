@@ -20,7 +20,6 @@ class MovieController{
             const movie = response.data
             const links = await validLink(movie.title)
             res.render('movie', {movie, imgURL, links})
-
             
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);

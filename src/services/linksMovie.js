@@ -7,8 +7,8 @@ const links = [
         division_url:"-"
     },
     {
-        name: "Super Cine",
-        link: "https://supercine.to/filmes/",
+        name: "Super Filmes",
+        link: "https://superfilmes.bio/filmes/assistir-online-",
         division_url:"-",
     },
     {
@@ -18,17 +18,17 @@ const links = [
     },
     {
         name: "Mega Cine",
-        link: "https://megacine.to/filmes/assistir-",
+        link: "https://minhaserie.net/filme/",
         division_url:"-",
-        endUrl:"-online"
     },
-]
+];
 
 async function linkMovies(movie){
     var movieLinks = [];
     
     for (const website of links) {
-        let modMovie = movie.replace(/[:]/g,"").split(' ').join(website.division_url)
+        let modMovie = movie.toLowerCase().replace(/'/g, ' rsquo ')
+        .replace(/[:]/g,"").split(' ').join(website.division_url)
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         let movieLink = `${website.link}${modMovie}`;
         if (website.endUrl) {
@@ -43,9 +43,10 @@ export async function validLink(movieTitle){
     var responses = await linkMovies(movieTitle);
     for (const [index,link] of responses.entries()) {
         try {
-            await axios.get(link, { maxRedirects: 0 });
+            await axios.get(link, { maxRedirects: 1 });
         } catch (error) {
             responses.splice(index , 1);
+            console.log(error.response)
         }
     }
     return responses;
