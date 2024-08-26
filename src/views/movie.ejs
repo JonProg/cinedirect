@@ -25,7 +25,9 @@
         <% if (links) { %>
             <% for(const [index, link] of links.entries()) { %>
                 <a href="<%= link %>" target="_blank">LINK <%= index+1 %></a>
-            <% } %>
+            <% } 
+        <% } else { %>
+            <p>Nenhum link para o filme</p>
         <% } %>
 
         <%- include('includes/footer') %>
