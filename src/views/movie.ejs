@@ -9,30 +9,38 @@
 </head>
     <body>
         <%- include('partials/_search') %>
-        <div class="w-50 mx-auto text-center">
+        <div class="w-50 mx-auto text-center mt-5">
             <% if (movie) { %>
-                <img src="<%= imgURL %><%= movie.poster_path %>" alt="poster <%= movie.title %>">
-                <h3><%= movie.title %></h3>
-                <h5> 
-                <span>Gêneros:</span>
-                (<%for (const genre of movie.genres) { %>
-                    <span><%= genre.name%></span>
-                <%}%>) |
-                <%= movie.release_date %> 
-                </h5>
-                <h7><%= movie.overview %></h7>
+                <img src="<%= imgURL %>w200<%= movie.poster_path %>"
+                loading="lazy" alt="poster <%= movie.title %>">
+                <div class="p-4">
+                    <h3><%= movie.title %></h3>
+                    <h5> 
+                    <span>Gêneros:</span>
+                    (<%for (const genre of movie.genres) { %>
+                        <span><%= genre.name%></span>
+                    <%}%>) |
+                    <%= movie.release_date %> 
+                    </h5>
+                    <div class="p-2">
+                        <h7><%= movie.overview %></h7>
+                    </div>
+                </div>
+                <img src="<%= imgURL %>w500<%= movie.backdrop_path %>"
+                loading="lazy" alt="image of <%= movie.title %>">
             <% } %>
+            <div class="p-3">
+                <h4>Links para o filme:</h4>
+                <% if (Object.keys(links).length !== 0) { %>
+                    <% for(const link in links) { %>
+                        <a style="font-size: larger;"
+                        href="<%= links[link] %>" target="_blank"><%= link %></a>
+                    <% } %>
+                <% } else { %>
+                    <p>Nenhum link para o filme escolhido</p>
+                <% } %>
+            </div>
         </div>
-        <h4>Links para o filme:</h4>
-        <i class="bi-alarm"></i>
-        <% if (Object.keys(links).length !== 0) { %>
-            <% for(const link in links) { %>
-                <a style="display: block; font-size: larger;"
-                href="<%= links[link] %>" target="_blank"><%= link %></a>
-            <% } %>
-        <% } else { %>
-            <p>Nenhum link para o filme escolhido</p>
-        <% } %>
 
         <%- include('partials/_footer') %>
     </body>

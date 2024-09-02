@@ -12,7 +12,7 @@
     <% if (movies) { %>
         <%for (const movie of movies) { %>
             <a href="/movie/<%= movie.id %>">
-                <img src="<%= imgURL %><%= movie.poster_path %>" alt="poster <%= movie.title %>">
+                <img src="<%= imgURL %>w200<%= movie.poster_path %>" alt="poster <%= movie.title %>">
             </a>
             <p><%= movie.title %></p>
             <p><%= movie.release_date %></p>

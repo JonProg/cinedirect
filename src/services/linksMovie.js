@@ -28,13 +28,21 @@ const links = [
     },
 ];
 
+function formatMovieTitle(movie, division_url) {
+    return movie.toLowerCase()
+        .replace(/'/g, ' rsquo ')
+        .replace(/[:!]/g, "")
+        .split(' ')
+        .join(division_url)
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
 async function linkMovies(movie){
     var movieLinks = {};
     
     for (const website of links) {
-        let modMovie = movie.toLowerCase().replace(/'/g, ' rsquo ')
-        .replace(/[:!]/g,"").split(' ').join(website.division_url)
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        let modMovie = formatMovieTitle(movie, website.division_url);
         let movieLink = `${website.link}${modMovie}`;
         if (website.endUrl) {
             movieLink += website.endUrl
