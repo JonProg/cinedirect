@@ -53,16 +53,19 @@ async function linkMovies(movie){
 }
 
 export async function validLink(movieTitle){
-    let response = await linkMovies(movieTitle);
-    for (const link in response) {
+    const response = await linkMovies(movieTitle);
+    const validLinks = {}
+
+    const promises = Object.entries(response).map(async ([name, url]) => {
         try {
-            await axios.get(response[link], { maxRedirects: 1 });
+            await axios.get(url, { maxRedirects: 1 });
+            validLinks[name] = url;
         } catch (error) {
-            delete response[link]
+            console.error(`Erro ao verificar o link para ${name}:`, error.message);
         }
-    }
-    if (response=={}) {
-        return null
-    }
-    return response;
+    });
+    
+    await Promise.all(promises);
+
+    return Object.keys(validLinks).length > 0 ? validLinks : null;
 }
