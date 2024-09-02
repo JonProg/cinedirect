@@ -9,7 +9,7 @@
 </head>
     <body>
         <%- include('partials/_search') %>
-        <div class="w-50 mx-auto text-center mt-5">
+        <div class="mx-auto text-center mt-5">
             <% if (movie) { %>
                 <img src="<%= imgURL %>w200<%= movie.poster_path %>"
                 loading="lazy" alt="poster <%= movie.title %>">
@@ -22,7 +22,7 @@
                     <%}%>) |
                     <%= movie.release_date %> 
                     </h5>
-                    <div class="p-2">
+                    <div class="p-2" style="width: auto;">
                         <h7><%= movie.overview %></h7>
                     </div>
                 </div>
@@ -32,10 +32,15 @@
             <div class="p-3">
                 <h4>Links para o filme:</h4>
                 <% if (Object.keys(links).length !== 0) { %>
-                    <% for(const link in links) { %>
-                        <a style="font-size: larger;"
-                        href="<%= links[link] %>" target="_blank"><%= link %></a>
-                    <% } %>
+                    <div class="mt-4 mb-4 d-flex justify-content-center gap-3">
+                        <% for(const link in links) { %>
+                            <a class="p-3 text-center bg-dark hover-bg-primary" style="font-size: larger;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 0.5rem;"
+                            href="<%= links[link] %>" target="_blank"><%= link %></a>
+                        <% } %> 
+                    </div>
                 <% } else { %>
                     <p>Nenhum link para o filme escolhido</p>
                 <% } %>
