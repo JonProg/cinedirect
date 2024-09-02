@@ -21,6 +21,11 @@ const links = [
         link: "https://minhaserie.net/filme/",
         division_url:"-",
     },
+    {
+        name: "Rede Canais",
+        link: "https://redecanais.in/filme/",
+        division_url:"-",
+    },
 ];
 
 async function linkMovies(movie){
