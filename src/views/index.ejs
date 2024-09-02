@@ -10,14 +10,18 @@
 <body>
     <%- include('partials/_search') %>
     <% if (movies) { %>
-        <%for (const movie of movies) { %>
-            <a href="/movie/<%= movie.id %>">
-                <img src="<%= imgURL %>w200<%= movie.poster_path %>" alt="poster <%= movie.title %>">
-            </a>
-            <p><%= movie.title %></p>
-            <p><%= movie.release_date %></p>
-            <hr>
-        <%}%>
+        <div class="container">
+            <%for (const movie of movies) { %>
+                <div class="col">
+                    <a href="/movie/<%= movie.id %>">
+                        <img src="<%= imgURL %>w200<%= movie.poster_path %>" alt="poster <%= movie.title %>">
+                    </a>
+                    <p><%= movie.title %></p>
+                    <p><%= movie.release_date %></p>
+                    <hr>
+                </div>
+            <%}%>
+        </div>
     <% } else if (inputValue) { %>
         <div class="mt-5 text-center">
             <h3>"<%= inputValue %>" não existe no nosso catálogo de filmes</h3>
