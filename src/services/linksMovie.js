@@ -50,7 +50,6 @@ export async function validLink(movieTitle){
         try {
             await axios.get(response[link], { maxRedirects: 1 });
         } catch (error) {
-            console.log(response[link])
             delete response[link]
         }
     }
