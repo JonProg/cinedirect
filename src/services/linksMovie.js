@@ -21,6 +21,11 @@ const links = [
         link: "https://minhaserie.net/filme/",
         division_url:"-",
     },
+    {
+        name: "Ultra Flix",
+        link: "https://ultraflix.lat/filme/",
+        division_url:"-",
+    },
 ];
 
 async function linkMovies(movie){
