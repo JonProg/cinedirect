@@ -21,11 +21,6 @@ const links = [
         link: "https://minhaserie.net/filme/",
         division_url:"-",
     },
-    {
-        name: "Rede Canais",
-        link: "https://redecanais.in/filme/",
-        division_url:"-",
-    },
 ];
 
 async function linkMovies(movie){
@@ -50,6 +45,7 @@ export async function validLink(movieTitle){
         try {
             await axios.get(response[link], { maxRedirects: 1 });
         } catch (error) {
+            console.log(response[link])
             delete response[link]
         }
     }
