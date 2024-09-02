@@ -4,6 +4,6 @@ import homeController from '../controllers/homeController';
 const router = new Router();
 
 router.get('/', homeController.index);
-router.post('/submit', homeController.submit);
+router.get('/search', homeController.search);
 
 export default router;

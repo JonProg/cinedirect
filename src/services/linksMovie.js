@@ -17,37 +17,39 @@ const links = [
         division_url:"-"
     },
     {
-        name: "Mega Cine",
+        name: "Minha Serie",
         link: "https://minhaserie.net/filme/",
         division_url:"-",
     },
 ];
 
 async function linkMovies(movie){
-    var movieLinks = [];
+    var movieLinks = {};
     
     for (const website of links) {
         let modMovie = movie.toLowerCase().replace(/'/g, ' rsquo ')
-        .replace(/[:]/g,"").split(' ').join(website.division_url)
+        .replace(/[:!]/g,"").split(' ').join(website.division_url)
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         let movieLink = `${website.link}${modMovie}`;
         if (website.endUrl) {
             movieLink += website.endUrl
         };
-        movieLinks.push(movieLink);
+        movieLinks[website.name] = `${movieLink}`
     }
     return movieLinks
 }
 
 export async function validLink(movieTitle){
-    var responses = await linkMovies(movieTitle);
-    for (const [index,link] of responses.entries()) {
+    let response = await linkMovies(movieTitle);
+    for (const link in response) {
         try {
-            await axios.get(link, { maxRedirects: 1 });
+            await axios.get(response[link], { maxRedirects: 1 });
         } catch (error) {
-            responses.splice(index , 1);
-            console.log(error.response)
+            delete response[link]
         }
     }
-    return responses;
+    if (response=={}) {
+        return null
+    }
+    return response;
 }

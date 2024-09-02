@@ -1,10 +1,13 @@
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center mt-5">
         <div class="col-md-4">
-            <h1 class="text-center mb-1 display-5">CineDirect</h1>
-            <form action="/submit" method="post" class="container mt-5">
+            <h1 class="text-center mb-1 display-5">
+                <a href="/" style="text-decoration: none; 
+                color: darkorchid;">CineDirect</a>
+            </h1>
+            <form action="/search" method="get" class="container mt-5">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="inputName" placeholder="Nome do Filme...">
+                    <input type="text" class="form-control" name="movie" placeholder="Nome do Filme...">
                     <div class="input-group-append">
                         <button class="btn btn-primary ms-3 mb-1" type="submit">Buscar</button>
                     </div>

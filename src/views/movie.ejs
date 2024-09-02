@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
     <body>
-        <%- include('includes/search') %>
+        <%- include('partials/_search') %>
         <% if (movie) { %>
             <img src="<%= imgURL %><%= movie.poster_path %>" alt="poster <%= movie.title %>">
             <h3><%= movie.title %></h3>
@@ -22,14 +22,14 @@
         <% } %>
         <hr>
         <h5>Links para o filme:</h5>
-        <% if (links) { %>
-            <% for(const [index, link] of links.entries()) { %>
-                <a href="<%= link %>" target="_blank">LINK <%= index+1 %></a>
+        <% if (Object.keys(links).length !== 0) { %>
+            <% for(const link in links) { %>
+                <a href="<%= links[link] %>" target="_blank"><%= link %></a>
             <% } %>
         <% } else { %>
-            <p>Nenhum link para o filme</p>
+            <p>Nenhum link para o filme escolhido</p>
         <% } %>
 
-        <%- include('includes/footer') %>
+        <%- include('partials/_footer') %>
     </body>
 </html>

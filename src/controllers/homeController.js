@@ -9,32 +9,36 @@ const imgURL = process.env.API_IMG;
 
 class HomeController{
     async index(req,res){
-        res.render('index',{movies: false});
+        res.render('index',{movies:false, inputValue: null});
     };
 
-    async submit(req,res){
-        const inputValue = req.body.inputName;
+    async search(req,res){
+        var inputValue = req.query.movie;
+        var numberPage = req.query.page || 1;
         const params = {
             "api_key": apiKey,
             "query":inputValue,
             "include_adult": false,
-            "language":"pt-BR"
+            "language":"pt-BR",
+            "page":numberPage,
         }
 
         try {
             const response = await axios.get(serchURL,{params:params})
 
-            var movies = response.data.results
-            .filter(movie => movie.poster_path !== null)
-            .filter(movie => movie.popularity >= 17)
-            .filter(movie => Number(movie.release_date.slice(0,4)) >= 1990)
-            .slice(0,10);
+            if (response.data.results.length < 1) { 
+                res.render('index',{movies:false,inputValue});
 
-            res.render('index', {movies, imgURL})
-
+            }else{
+                let movies = response.data.results.filter(movie => movie.poster_path !== null)
+                .filter(movie => movie.popularity >= 17)
+                .filter(movie => Number(movie.release_date.slice(0,4)) >= 1990)
+                .slice(0,10);
+                res.render('index', {movies, imgURL});
+            }
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
-            res.render('index',{movies: false});
+            res.render('index');
         }
     };
 }
