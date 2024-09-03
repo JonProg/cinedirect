@@ -31,7 +31,7 @@
             <% } %>
             <div class="p-3">
                 <h4>Links para o filme:</h4>
-                <% if (Object.keys(links).length !== 0) { %>
+                <% if (links) { %>
                     <div class="mt-4 mb-4 d-flex justify-content-center gap-3">
                         <% for(const link in links) { %>
                             <a class="p-3 text-center bg-dark hover-bg-primary" style="font-size: larger;
