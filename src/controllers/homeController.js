@@ -14,27 +14,46 @@ class HomeController{
 
     async search(req,res){
         var inputValue = req.query.movie;
-        var numberPage = req.query.page || 1;
+        var numberPage = parseInt(req.query.page) || 1;
+        const resultsPerPage = 20;
+        let allMovies = [];
+        let currentPage = 1;
+        let totalPages = 1;
+
         const params = {
             "api_key": apiKey,
             "query":inputValue,
             "include_adult": false,
             "language":"pt-BR",
-            "page":numberPage,
         }
 
         try {
-            const response = await axios.get(serchURL,{params:params})
-
-            if (response.data.results.length < 1) { 
-                res.render('index',{movies:false,inputValue});
-
-            }else{
-                let movies = response.data.results.filter(movie => movie.poster_path !== null)
-                .filter(movie => movie.popularity >= 17)
-                .filter(movie => Number(movie.release_date.slice(0,4)) >= 1990)
-                .slice(0,15);
-                res.render('index', {movies, imgURL});
+            while (allMovies.length < numberPage * resultsPerPage && currentPage <= totalPages) {
+                params.page = currentPage;
+                const response = await axios.get(serchURL, { params: params });
+                totalPages = response.data.total_pages;
+                console.log(totalPages)
+    
+                let filteredMovies = response.data.results.filter(movie => {
+                    return movie.poster_path !== null &&
+                        movie.popularity >= 17 &&
+                        Number(movie.release_date.slice(0, 4)) >= 1990 &&
+                        movie.title.toLowerCase().includes(inputValue);
+                });
+    
+                allMovies = allMovies.concat(filteredMovies);
+                currentPage++;
+            }
+    
+            let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
+    
+            console.log("Total de filmes encontrados após filtro:", allMovies.length);
+            console.log("Total de páginas após filtro:", Math.ceil(allMovies.length / resultsPerPage));
+    
+            if (movies.length < 1) {
+                res.render('index', { movies: false, inputValue });
+            } else {
+                res.render('index', { movies, imgURL, totalPages: Math.ceil(allMovies.length / resultsPerPage), inputValue });
             }
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
