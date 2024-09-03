@@ -33,7 +33,7 @@ class HomeController{
                 let movies = response.data.results.filter(movie => movie.poster_path !== null)
                 .filter(movie => movie.popularity >= 17)
                 .filter(movie => Number(movie.release_date.slice(0,4)) >= 1990)
-                .slice(0,10);
+                .slice(0,15);
                 res.render('index', {movies, imgURL});
             }
         } catch (error) {

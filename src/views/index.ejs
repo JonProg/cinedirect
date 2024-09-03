@@ -10,17 +10,18 @@
 <body>
     <%- include('partials/_search') %>
     <% if (movies) { %>
-        <div class="container">
-            <%for (const movie of movies) { %>
-                <div class="col">
-                    <a href="/movie/<%= movie.id %>">
-                        <img src="<%= imgURL %>w200<%= movie.poster_path %>" alt="poster <%= movie.title %>">
-                    </a>
-                    <p><%= movie.title %></p>
-                    <p><%= movie.release_date %></p>
-                    <hr>
-                </div>
-            <%}%>
+        <div class="container mt-5">
+            <div class="row">
+                <%for (const movie of movies) { %>
+                    <div class="col text-center">
+                        <a href="/movie/<%= movie.id %>">
+                            <img src="<%= imgURL %>w200<%= movie.poster_path %>" alt="poster <%= movie.title %>">
+                        </a>
+                        <p style="font-size:large; font-weight:500 ;"><%= movie.title %>
+                            <br>(<%= movie.release_date %>)</p>
+                    </div>
+                <%}%>
+            </div>
         </div>
     <% } else if (inputValue) { %>
         <div class="mt-5 text-center">
