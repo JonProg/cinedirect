@@ -32,7 +32,6 @@ class HomeController{
                 params.page = currentPage;
                 const response = await axios.get(serchURL, { params: params });
                 totalPages = response.data.total_pages;
-                console.log(totalPages)
     
                 let filteredMovies = response.data.results.filter(movie => {
                     return movie.poster_path !== null &&
@@ -46,14 +45,12 @@ class HomeController{
             }
     
             let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
-    
-            console.log("Total de filmes encontrados após filtro:", allMovies.length);
-            console.log("Total de páginas após filtro:", Math.ceil(allMovies.length / resultsPerPage));
+            let totalPages = Math.ceil(allMovies.length / resultsPerPage)
     
             if (movies.length < 1) {
                 res.render('index', { movies: false, inputValue });
             } else {
-                res.render('index', { movies, imgURL, totalPages: Math.ceil(allMovies.length / resultsPerPage), inputValue });
+                res.render('index', { movies, imgURL, totalPages, inputValue });
             }
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
