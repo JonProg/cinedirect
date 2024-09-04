@@ -1,15 +1,15 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
-      <% if (currentPage > 1) { %>
-          <li class="page-item"><a class="page-link" href="?movie=<%= inputValue %>&page=<%= currentPage - 1 %>">Anterior</a></li>
+      <% if (numberPage > 1) { %>
+          <li class="page-item"><a class="page-link" href="?movie=<%= inputValue %>&page=<%= numberPage - 1 %>">Anterior</a></li>
       <% } %>
       <% for (let i = 1; i <= totalPages; i++) { %>
-          <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+          <li class="page-item <%= i === numberPage ? 'active' : '' %>">
               <a class="page-link" href="?movie=<%= inputValue %>&page=<%= i %>"><%= i %></a>
           </li>
       <% } %>
-      <% if (currentPage < totalPages) { %>
-          <li class="page-item"><a class="page-link" href="?movie=<%= inputValue %>&page=<%= currentPage + 1 %>">Próximo</a></li>
+      <% if (numberPage < totalPages) { %>
+          <li class="page-item"><a class="page-link" href="?movie=<%= inputValue %>&page=<%= numberPage + 1 %>">Próximo</a></li>
       <% } %>
   </ul>
 </nav>

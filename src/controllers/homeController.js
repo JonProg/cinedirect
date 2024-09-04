@@ -45,12 +45,18 @@ class HomeController{
             }
     
             let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
-            let totalPages = Math.ceil(allMovies.length / resultsPerPage)
-    
+            console.log(numberPage, Math.ceil(allMovies.length / resultsPerPage))
+
             if (movies.length < 1) {
                 res.render('index', { movies: false, inputValue });
             } else {
-                res.render('index', { movies, imgURL, totalPages, inputValue });
+                res.render('index', { 
+                    movies, 
+                    imgURL, 
+                    totalPages: Math.ceil(allMovies.length / resultsPerPage), 
+                    inputValue,
+                    numberPage
+                });
             }
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
