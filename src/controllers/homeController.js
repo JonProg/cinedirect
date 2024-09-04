@@ -6,10 +6,32 @@ dotenv.config()
 const serchURL = process.env.API_SEARCH;
 const apiKey = process.env.API_KEY;
 const imgURL = process.env.API_IMG;
+const apiTrend = process.env.API_TREND;
 
 class HomeController{
     async index(req,res){
-        res.render('index',{movies:false, inputValue: null});
+
+        const params = {
+            "api_key" : apiKey,
+            "language" : "pt-BR", 
+        }
+
+        try {
+            const response = await axios.get(apiTrend, { params: params });
+            let movies = response.data.results
+            res.render('index',{
+                movies,
+                imgURL,
+                inputValue : false,
+                numberPage : false,
+            });
+        } catch (error) {
+            res.send(`
+                <h1>Ocorreu um erro</h1>
+                <p>${error.message}</p>
+                <pre>${error.stack}</pre>
+            `);
+        }
     };
 
     async search(req,res){
@@ -45,7 +67,7 @@ class HomeController{
             }
     
             let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
-            console.log(numberPage, Math.ceil(allMovies.length / resultsPerPage))
+            totalPages = Math.ceil(allMovies.length / resultsPerPage)
 
             if (movies.length < 1) {
                 res.render('index', { movies: false, inputValue });
@@ -53,7 +75,7 @@ class HomeController{
                 res.render('index', { 
                     movies, 
                     imgURL, 
-                    totalPages: Math.ceil(allMovies.length / resultsPerPage), 
+                    totalPages, 
                     inputValue,
                     numberPage
                 });
