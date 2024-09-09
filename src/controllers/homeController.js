@@ -50,7 +50,7 @@ class HomeController{
         }
 
         try {
-            while (allMovies.length < numberPage * resultsPerPage && currentPage <= totalPages) {
+            while (allMovies.length < numberPage * resultsPerPage+1 && currentPage <= totalPages) {
                 params.page = currentPage;
                 const response = await axios.get(serchURL, { params: params });
                 totalPages = response.data.total_pages;
@@ -64,13 +64,14 @@ class HomeController{
                 allMovies = allMovies.concat(filteredMovies);
                 currentPage++;
             }
-    
+            console.log(allMovies.length)
             let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
             totalPages = Math.ceil(allMovies.length / resultsPerPage)
 
             if (movies.length < 1) {
                 res.render('index', { movies: false, inputValue, numberPage:false });
             } else {
+                console.log(totalPages)
                 res.render('index', { 
                     movies, 
                     imgURL, 
