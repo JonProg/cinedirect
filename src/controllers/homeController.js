@@ -58,8 +58,7 @@ class HomeController{
                 let filteredMovies = response.data.results.filter(movie => {
                     return movie.poster_path !== null &&
                         movie.popularity >= 17 &&
-                        Number(movie.release_date.slice(0, 4)) >= 1990 &&
-                        movie.title.toLowerCase().includes(inputValue);
+                        Number(movie.release_date.slice(0, 4)) >= 1990;
                 });
     
                 allMovies = allMovies.concat(filteredMovies);
@@ -70,7 +69,7 @@ class HomeController{
             totalPages = Math.ceil(allMovies.length / resultsPerPage)
 
             if (movies.length < 1) {
-                res.render('index', { movies: false, inputValue });
+                res.render('index', { movies: false, inputValue, numberPage:false });
             } else {
                 res.render('index', { 
                     movies, 
