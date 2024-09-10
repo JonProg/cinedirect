@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineDirect</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>CineDirect</title> 
 </head>
-<body>
+<style>
+    .bkg{
+        background-color: rgb(18, 18, 18);
+    }
+    .movie{
+        border-radius: 0.5rem;
+        box-shadow: 0 0 25px 1px rgb(62, 62, 62);
+    }
+    .title-movie{
+        font-size:medium;
+        font-weight:500;
+        color: rgb(240, 240, 240);
+    }
+</style>
+<body class="bkg">
     <%- include('partials/_search') %>
     <% if (movies) { %>
         <div class="container mt-5">
@@ -15,10 +28,13 @@
                 <%for (const movie of movies) { %>
                     <div class="col text-center">
                         <a href="/movie/<%= movie.id %>">
-                            <img src="<%= imgURL %>w200<%= movie.poster_path %>" alt="poster <%= movie.title %>">
+                            <img class="movie" src="<%= imgURL %>w200<%= movie.
+                            poster_path %>"alt="poster <%= movie.title %>">
                         </a>
-                        <p style="font-size:large; font-weight:500 ;"><%= movie.title %>
-                            <br>(<%= movie.release_date %>)</p>
+                        <div class="p-3">
+                            <p class="title-movie"><%= movie.title %>
+                            | <%= movie.release_date.slice(0,4) %></p>
+                        </div>
                     </div>
                 <%}%>
             </div>
