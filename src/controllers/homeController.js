@@ -57,7 +57,7 @@ class HomeController{
     
                 let filteredMovies = response.data.results.filter(movie => {
                     return movie.poster_path !== null &&
-                        movie.vote_average >= 17 &&
+                        movie.popularity >= 17 &&
                         Number(movie.release_date.slice(0, 4)) >= 1990;
                 });
     
