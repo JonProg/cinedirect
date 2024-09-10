@@ -57,14 +57,14 @@ class HomeController{
     
                 let filteredMovies = response.data.results.filter(movie => {
                     return movie.poster_path !== null &&
-                        movie.popularity >= 17 &&
+                        movie.vote_average >= 17 &&
                         Number(movie.release_date.slice(0, 4)) >= 1990;
                 });
     
                 allMovies = allMovies.concat(filteredMovies);
                 currentPage++;
             }
-            console.log(allMovies.length)
+
             let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
             totalPages = Math.ceil(allMovies.length / resultsPerPage)
 
