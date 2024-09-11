@@ -96,6 +96,20 @@ meter {
     all: revert;
 }
 
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #eeeeee;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #eeeeee93;
+    border-radius: 1rem;
+}
+
 html{
     font-size: 62.5%;
     scroll-behavior: smooth;
@@ -112,13 +126,36 @@ body{
     background-color: rgb(18, 18, 18);
 }
 
-.movie{
+.movie-image{
     border-radius: 0.5rem;
     box-shadow: 0 0 25px 1px rgb(62, 62, 62);
+    transition: 0.5s ease;
 }
 
+.movie-image:hover{
+    transform: scale(1.02);
+}
+
+.wrapper{
+    scroll-behavior: smooth;
+    max-height: auto;
+    display: flex;
+    overflow-x: auto;
+    background-color: transparent;
+}
+
+.wrapper::-webkit-scrollbar{
+    height: 0.4rem;
+}
+
+.movie-item{
+    margin: 2.5rem 1rem;
+    min-width: 20rem;
+}
+
+
 .title-movie{
-    font-size:medium;
+    font-size:1.5rem;
     font-weight:400;
     color: rgb(240, 240, 240);
 }
@@ -127,12 +164,13 @@ body{
     text-decoration: none; 
     color: rgb(240, 240, 240);
     font-size:5rem;
-    font-weight: 300;
+    font-weight: 400;
     padding-bottom: 1rem;
 }
 
 .search{
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 6rem 0;
@@ -140,9 +178,8 @@ body{
 
 #input-group{
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 0.6rem;
+    border-radius: 0.5rem;
     background-color: rgb(241, 241, 241);
 }
 
