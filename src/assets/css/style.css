@@ -126,7 +126,7 @@ body{
 #title-web{
     text-decoration: none; 
     color: rgb(240, 240, 240);
-    font-size:4.5rem;
+    font-size:5rem;
     font-weight: 300;
     padding-bottom: 1rem;
 }
@@ -164,6 +164,10 @@ body{
     border: none;
     font-size: 2rem;
     color: rgb(12, 12, 12);
+}
+
+.lupa:hover{
+    color: gray;
 }
 
 
