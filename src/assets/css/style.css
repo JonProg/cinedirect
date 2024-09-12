@@ -209,7 +209,7 @@ body{
     color: gray;
 }
 
-.topMovies{
+.top-movies{
     display: grid;
     margin: 0 1.4rem;
     grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
@@ -217,7 +217,7 @@ body{
     justify-items: center;
 }
 
-#dataProfile h3{
+#footer-profile h3{
     display: flex;
     justify-content: center;
     font-weight: 500;
@@ -225,6 +225,31 @@ body{
     font-size: 1.7rem;
     color: #eeeeee;
 }
+
+.movie-about{
+    color: #eeeeee;
+}
+
+.movie-details{
+    display: flex;
+}
+
+.movie-details h1{
+    font-size: 2.7rem;
+    font-weight: 500;
+}
+
+.movie-details h2{
+    font-size: 1.5rem;
+    font-weight: 400;
+    width: 50rem;
+}
+
+.movie-details h3{
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
 
 body header{
     margin-left: 2.4rem;
