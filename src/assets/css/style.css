@@ -138,6 +138,7 @@ body{
 
 .wrapper{
     margin: 0 1.4rem;
+    margin-bottom: 2.5rem;
     scroll-behavior: smooth;
     max-height: auto;
     display: flex;
