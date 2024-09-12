@@ -7,38 +7,32 @@
     <title>CineDirect</title> 
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    <%- include('partials/_search') %>
-    <% if (movies) { %>
-        <header>
-            <h2>| DESTAQUES</h2>
-        </header>
-        <div class="wrapper" >
-            <%for (const movie of movies) { %>
-                <div class="movie-item">
-                    <a href="/movie/<%= movie.id %>">
-                        <img class="movie-image" src="<%= imgURL %>w200<%= movie.
-                        poster_path %>"alt="poster <%= movie.title %>"
-                        draggable="false">
-                    </a>
-                    <% if (movie.title.length < 20) { %>
-                        <p class="title-movie"><%= movie.title %></p>
-                    <% }else{ %>
-                        <p class="title-movie"><%= movie.title.
-                        slice(0,17) %>...</p>
-                    <% } %>
-                </div>
-            <%}%>
-        </div>
-        <header>
-            <h2>| TOP 20</h2>
-        </header>
-    <% } else if (inputValue) { %>
-        <h3>"<%= inputValue %>" não existe no nosso catálogo de filmes</h3>
-    <% } %>
-    <% if (numberPage) { %>
-        <%- include('partials/_pagination', {numberPage, totalPages, inputValue}) %>
-    <% } %>
-    <%- include('partials/_footer') %>
-</body>
+    <body>
+        <%- include('partials/_search') %>
+        <% if (moviesTrend && moviesTop) { %>
+            <header>
+                <h2>| DESTAQUES</h2>
+            </header>
+            <div class="wrapper" >
+                <%for (const movie of moviesTrend) { %>
+                    <div class="movie-item">
+                        <a href="/movie/<%= movie.id %>">
+                            <img class="movie-image" src="<%= imgURL %>w200<%= movie.
+                            poster_path %>"alt="poster <%= movie.title %>"
+                            draggable="false">
+                        </a>
+                        <% if (movie.title.length < 20) { %>
+                            <p class="title-movie"><%= movie.title %></p>
+                        <% }else{ %>
+                            <p class="title-movie"><%= movie.title.
+                            slice(0,17) %>...</p>
+                        <% } %>
+                    </div>
+                <%}%>
+            </div>
+            <header>
+                <h2>| TOP 20</h2>
+            </header>
+        <% } %>
+    </body>
 </html>

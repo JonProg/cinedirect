@@ -7,6 +7,7 @@ const serchURL = process.env.API_SEARCH;
 const apiKey = process.env.API_KEY;
 const imgURL = process.env.API_IMG;
 const apiTrend = process.env.API_TREND;
+const apiTop = process.env.API_TOP20;
 
 class HomeController{
     async index(req,res){
@@ -17,13 +18,14 @@ class HomeController{
         }
 
         try {
-            const response = await axios.get(apiTrend, { params: params });
-            let movies = response.data.results
+            const trendMovies = await axios.get(apiTrend, { params: params });
+            const topMovies = await axios.get(apiTop, {params:params});
+            let moviesTop = topMovies.data.results.slice(0,19)
+            let moviesTrend = trendMovies.data.results
             res.render('index',{
-                movies,
+                moviesTrend,
+                moviesTop,
                 imgURL,
-                inputValue : false,
-                numberPage : false,
             });
         } catch (error) {
             res.send(`
@@ -69,10 +71,9 @@ class HomeController{
             totalPages = Math.ceil(allMovies.length / resultsPerPage)
 
             if (movies.length < 1) {
-                res.render('index', { movies: false, inputValue, numberPage:false });
+                res.render('listMovies', { movies: false, inputValue, numberPage:false });
             } else {
-                console.log(totalPages)
-                res.render('index', { 
+                res.render('listMovies', { 
                     movies, 
                     imgURL, 
                     totalPages, 
