@@ -217,6 +217,15 @@ body{
     justify-items: center;
 }
 
+#dataProfile h3{
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    margin: 2.5rem 0 4rem 0;
+    font-size: 1.7rem;
+    color: #eeeeee;
+}
+
 body header{
     margin-left: 2.4rem;
     font-size: 2.2rem;
