@@ -20,7 +20,7 @@ class HomeController{
         try {
             const trendMovies = await axios.get(apiTrend, { params: params });
             const topMovies = await axios.get(apiTop, {params:params});
-            let moviesTop = topMovies.data.results.slice(0,19)
+            let moviesTop = topMovies.data.results.slice(0,20)
             let moviesTrend = trendMovies.data.results
             res.render('index',{
                 moviesTrend,

@@ -209,6 +209,14 @@ body{
     color: gray;
 }
 
+.topMovies{
+    display: grid;
+    margin: 0 1.4rem;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    justify-content: center;
+    justify-items: center;
+}
+
 body header{
     margin-left: 2.4rem;
     font-size: 2.2rem;

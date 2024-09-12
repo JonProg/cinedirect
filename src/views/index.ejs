@@ -33,6 +33,23 @@
             <header>
                 <h2>| TOP 20</h2>
             </header>
+            <div class="topMovies">
+                <%for (const topMovie of moviesTop ) { %>
+                    <div class="movie-item">
+                        <a href="/movie/<%= topMovie.id %>">
+                            <img class="movie-image" src="<%= imgURL %>w200<%= topMovie.
+                            poster_path %>"alt="poster <%= topMovie.title %>"
+                            draggable="false">
+                        </a>
+                        <% if (topMovie.title.length < 20) { %>
+                            <p class="title-movie"><%= topMovie.title %></p>
+                        <% }else{ %>
+                            <p class="title-movie"><%= topMovie.title.
+                            slice(0,17) %>...</p>
+                        <% } %>
+                    </div>
+                <%}%>
+            </div>
         <% } %>
     </body>
 </html>
