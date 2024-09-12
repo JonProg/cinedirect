@@ -10,6 +10,9 @@
 <body>
     <%- include('partials/_search') %>
     <% if (movies) { %>
+        <header>
+            <h2>| DESTAQUES</h2>
+        </header>
         <div class="wrapper" >
             <%for (const movie of movies) { %>
                 <div class="movie-item">
@@ -27,6 +30,9 @@
                 </div>
             <%}%>
         </div>
+        <header>
+            <h2>| TOP 20</h2>
+        </header>
     <% } else if (inputValue) { %>
         <h3>"<%= inputValue %>" não existe no nosso catálogo de filmes</h3>
     <% } %>

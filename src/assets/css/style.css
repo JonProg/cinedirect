@@ -137,6 +137,7 @@ body{
 }
 
 .wrapper{
+    margin: 0 1.4rem;
     scroll-behavior: smooth;
     max-height: auto;
     display: flex;
@@ -156,7 +157,7 @@ body{
 
 .title-movie{
     font-size:1.5rem;
-    font-weight:400;
+    font-weight:300;
     color: rgb(240, 240, 240);
 }
 
@@ -207,4 +208,9 @@ body{
     color: gray;
 }
 
-
+body header{
+    margin-left: 2.4rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: #eeeeee;
+}
