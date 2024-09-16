@@ -223,12 +223,17 @@ body{
     align-items: center;
     font-weight: 500;
     margin: 2.5rem 0 4rem 0;
-    font-size: 1.7rem;
+    font-size: 1.9rem;
     color: #eeeeee;
 }
 
-.links-profile{
-    font-size: 2.5rem;
+.links-profile a{
+    font-size: 2.7rem;
+    margin: 0 0.3rem;
+}
+
+.links-profile a:hover{
+    color: gray;
 }
 
 .movie-about{
@@ -259,7 +264,7 @@ body{
 
 body header{
     margin-left: 2.4rem;
-    font-size: 2.2rem;
+    font-size: 2.3rem;
     font-weight: 500;
     color: #eeeeee;
 }
