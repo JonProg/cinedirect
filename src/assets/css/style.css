@@ -237,16 +237,27 @@ body{
 }
 
 .movie-about{
+    text-align: center;
     color: #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .movie-details{
     display: flex;
     justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+#movie-info{
+    margin-left: 1.8rem;
 }
 
 .movie-details h1{
-    font-size: 2.7rem;
+    font-size: 3.1rem;
     font-weight: 500;
 }
 

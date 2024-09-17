@@ -14,7 +14,7 @@
                 <div class="movie-details">
                     <img src="<%= imgURL %>w200<%= movie.poster_path %>"
                     loading="lazy" alt="poster <%= movie.title %>">
-                    <div class="movie-info">
+                    <div id="movie-info">
                         <h1><%= movie.title %> (<%= movie.release_date.slice(0,4) %>) </h1>
                         <h2><%= movie.overview %></h2>
                         <h3>  
