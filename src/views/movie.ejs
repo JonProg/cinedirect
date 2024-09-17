@@ -9,42 +9,38 @@
 </head>
     <body>
         <%- include('partials/_search') %>
-        <div class="movie-about">
-            <% if (movie) { %>
-                <div class="movie-details">
-                    <img src="<%= imgURL %>w200<%= movie.poster_path %>"
-                    loading="lazy" alt="poster <%= movie.title %>">
-                    <div id="movie-info">
-                        <h1><%= movie.title %> (<%= movie.release_date.slice(0,4) %>) </h1>
-                        <h2><%= movie.overview %></h2>
-                        <h3>  
-                            <span>Gêneros:</span>
-                            (<%for (const genre of movie.genres) { %>
-                                <span><%= genre.name%></span>
-                            <%}%>)
-                        </h3>
-                    </div>
+        <% if (movie) { %>
+            <div class="movie-details">
+                <img src="<%= imgURL %>w200<%= movie.poster_path %>"
+                loading="lazy" alt="poster <%= movie.title %>">
+                <div id="movie-info">
+                    <h1><%= movie.title %> (<%= movie.release_date.slice(0,4) %>) </h1>
+                    <h2><%= movie.overview %></h2>
+                    <h3>  
+                        <%for (const genre of movie.genres) { %>
+                            <div style="display: inline;
+                            background-color: gray;">
+                                <%= genre.name %>
+                            </div>
+                        <%}%>
+                    </h3>
                 </div>
-                <img src="<%= imgURL %>w500<%= movie.backdrop_path %>"
-                class="img-fluid" alt="Responsive image" loading="lazy"
-                alt="image of <%= movie.title %>">
-            <% } %>
-            <div class="movie-links">
-                <h4>Links para o filme:</h4>
-                <% if (links) { %>
-                    <div class="link-container">
-                        <% for(const link in links) { %>
-                            <a class="linkMovie" style="font-size: larger;
-                            color: white;
-                            text-decoration: none;
-                            border-radius: 0.5rem;"
-                            href="<%= links[link] %>" target="_blank"><%= link %></a>
-                        <% } %> 
-                    </div>
-                <% } else { %>
-                    <p>Nenhum link para o filme escolhido</p>
-                <% } %>
             </div>
+            <img src="<%= imgURL %>w500<%= movie.backdrop_path %>"
+            id="backdrop-movie" loading="lazy" alt="image of <%= movie.title %>">
+        <% } %>
+        <div id="movie-links">
+            <h1>Links para o filme:</h1>
+            <% if (links) { %>
+                <div class="link-container">
+                    <% for(const link in links) { %>
+                        <a class="linkMovie" href="<%= links[link] %>"
+                        target="_blank"><%= link %></a>
+                    <% } %> 
+                </div>
+            <% } else { %>
+                <p>Nenhum link para o filme escolhido</p>
+            <% } %>
         </div>
 
         <%- include('partials/_footer') %>

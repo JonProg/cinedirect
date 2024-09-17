@@ -167,15 +167,22 @@ body{
     color: rgb(240, 240, 240);
     font-size:5rem;
     font-weight: 400;
-    padding-bottom: 1rem;
+    padding-bottom: 1rem;   
 }
 
 .search{
     display: flex;
-    justify-content: center;
+    justify-items: center;
     align-items: center;
     flex-direction: column;
-    margin: 6rem 0;
+    margin: 4rem auto;
+    padding: 2.3rem;
+    min-width: 30rem;
+}
+
+.search form{
+    max-width: 100%;
+    min-width: 25%;
 }
 
 #input-group{
@@ -220,9 +227,10 @@ body{
 #footer-profile{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     font-weight: 500;
-    margin: 2.5rem 0 4rem 0;
+    margin: 2.5rem 0;
     font-size: 1.9rem;
     color: #eeeeee;
 }
@@ -236,20 +244,52 @@ body{
     color: gray;
 }
 
-.movie-about{
+#movie-links {
     text-align: center;
     color: #eeeeee;
+    font-size: 1.8rem;
+    margin-top: 2.7rem;
+}
+
+.link-container{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.link-container a{
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 0.7rem 0.7rem;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    color: rgb(11, 11, 11);
+    background-color: #eeeeee;
+}
+
+.link-container a:hover{
+    color: #eeeeee;
+    background-color: gray;
+}
+
+#backdrop-movie{
+    margin: 0 2.3rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 25px 1px rgb(46, 46, 46);
+    max-width: 70%;
+    height: auto;
 }
 
 .movie-details{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-content: center;
+    width: fit-content;
     text-align: left;
+    color: #eeeeee;
+    margin: 6.8rem 2.3rem;
+    justify-content: flex-start;
 }
 
 #movie-info{
@@ -257,14 +297,15 @@ body{
 }
 
 .movie-details h1{
-    font-size: 3.1rem;
+    font-size: 3.3rem;
     font-weight: 500;
 }
 
 .movie-details h2{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 400;
-    width: 50rem;
+    max-width: 50rem;
+    min-width: 10rem;
 }
 
 .movie-details h3{
@@ -278,4 +319,19 @@ body header{
     font-size: 2.3rem;
     font-weight: 500;
     color: #eeeeee;
+}
+
+@media (max-width:561px) {
+    #movie-info{
+        margin: 1.3rem 0;
+    }
+    .movie-details{
+        margin: 3.5rem 2.3rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    .movie-details img{
+        width: 75%;
+        height: 55%;
+    }
 }
