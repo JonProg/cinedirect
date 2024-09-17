@@ -10,7 +10,7 @@
     <body>
         <%- include('partials/_search') %>
         <% if (movies) { %>
-            <div class="wrapper" >
+            <div class="grid-movies" >
                 <%for (const movie of movies) { %>
                     <div class="movie-item">
                         <a href="/movie/<%= movie.id %>">

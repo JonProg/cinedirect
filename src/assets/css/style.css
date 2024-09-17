@@ -345,3 +345,11 @@ body header{
         height: 55%;
     }
 }
+
+.grid-movies{
+    display: grid;
+    margin: 0 1.4rem;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    justify-content: center;
+    justify-items: center;
+}
