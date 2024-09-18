@@ -1,15 +1,17 @@
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-      <% if (numberPage > 1) { %>
-          <li class="page-item"><a class="page-link" href="?movie=<%= inputValue %>&page=<%= numberPage - 1 %>">Anterior</a></li>
-      <% } %>
-      <% for (let i = 1; i <= totalPages; i++) { %>
-          <li class="page-item <%= i === numberPage ? 'active' : '' %>">
-              <a class="page-link" href="?movie=<%= inputValue %>&page=<%= i %>"><%= i %></a>
-          </li>
-      <% } %>
-      <% if (numberPage < totalPages) { %>
-          <li class="page-item"><a class="page-link" href="?movie=<%= inputValue %>&page=<%= numberPage + 1 %>">Próximo</a></li>
-      <% } %>
-  </ul>
-</nav>
+<div class="pagination">
+    <% if (numberPage > 1) { %>
+        <div class="page-item"><a class="page-link" href="?movie=<%= inputValue %>&page=<%= numberPage - 1 %>">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a></div>
+    <% } %>
+    <% for (let i = 1; i <= totalPages; i++) { %>
+        <div class="page-item <%= i === numberPage ? 'active' : '' %>">
+            <a class="page-link" href="?movie=<%= inputValue %>&page=<%= i %>"><%= i %></a>
+        </div>
+    <% } %>
+    <% if (numberPage < totalPages) { %>
+        <div class="page-item"><a class="page-link" href="?movie=<%= inputValue %>&page=<%= numberPage + 1 %>">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a></div>
+    <% } %>
+</div>

@@ -158,7 +158,7 @@ body{
 
 .title-movie{
     font-size:1.5rem;
-    font-weight:300;
+    font-weight:400;
     color: rgb(240, 240, 240);
 }
 
@@ -238,6 +238,10 @@ body{
 .links-profile a{
     font-size: 2.7rem;
     margin: 0 0.3rem;
+}
+
+.links-profile{
+    margin-top: 0.7rem;
 }
 
 .links-profile a:hover{
@@ -332,9 +336,14 @@ body header{
 }
 
 @media (max-width:561px) {
-    #movie-info{
-        margin: 1.3rem 0;
+    .movie-info{
+        margin: 2rem 0;
     }
+
+    .movie-info h2{
+        margin: 1.45rem 0;
+    }
+
     .movie-details{
         margin: 3.5rem 2.3rem;
         flex-direction: column;
@@ -352,4 +361,29 @@ body header{
     grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
     justify-content: center;
     justify-items: center;
+}
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 500;
+    background-color: aqua;
+    color: #eeeeee;
+}
+
+.page-item{
+    height: 3.5rem;
+    width: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    border: 0.15rem solid #eeeeee;
+    margin: 0 0.5rem;
+}
+
+.page-item.active{
+    background-color: black;
 }

@@ -60,7 +60,10 @@ class HomeController{
                 let filteredMovies = response.data.results.filter(movie => {
                     return movie.poster_path !== null &&
                         movie.popularity >= 12 &&
-                        Number(movie.release_date.slice(0, 4)) >= 1972;
+                        Number(movie.release_date.slice(0, 4)) >= 1972 &&
+                        movie.title.toLowerCase().includes(
+                            inputValue.toLowerCase()
+                        );
                 });
     
                 allMovies = allMovies.concat(filteredMovies);
