@@ -59,7 +59,7 @@ class HomeController{
     
                 let filteredMovies = response.data.results.filter(movie => {
                     return movie.poster_path !== null &&
-                        movie.popularity >= 13 &&
+                        movie.popularity >= 15.7 &&
                         Number(movie.release_date.slice(0, 4)) >= 1972 &&
                         movie.title.toLowerCase().includes(
                             inputValue.toLowerCase()
