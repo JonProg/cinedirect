@@ -58,7 +58,7 @@ export async function validLink(movieTitle){
 
     const promises = Object.entries(response).map(async ([name, url]) => {
         try {
-            await axios.get(url, { maxRedirects: 1 });
+            await axios.get(url, {timeout: 2500, maxRedirects: 1 });
             validLinks[name] = url;
         } catch (error) {
             console.error(`Erro ao verificar o link para ${name}:`, error.message);
