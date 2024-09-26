@@ -137,11 +137,11 @@ body{
 }
 
 .wrapper{
-    margin: 0 1.4rem;
+    margin: 0 0 0 1.4rem;
     margin-bottom: 2.5rem;
     scroll-behavior: smooth;
-    max-height: auto;
     display: flex;
+    align-items: center;
     overflow-x: auto;
     background-color: transparent;
 }
@@ -153,6 +153,10 @@ body{
 .movie-item{
     margin: 2.5rem 1rem;
     min-width: 20rem;
+}
+
+.movie-item img{
+    height: 28rem;
 }
 
 
