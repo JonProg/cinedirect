@@ -28,7 +28,9 @@
                 <%}%>
             </div>
         <% } else if (inputValue) { %>
-            <h3>"<%= inputValue %>" não existe no nosso catálogo de filmes</h3>
+            <div class="error-search">
+                <h3>"<%= inputValue %>" não existe no nosso catálogo de filmes</h3>
+            </div>
         <% } %>
         <% if (numberPage) { %>
             <%- include('partials/_pagination', {numberPage, totalPages, inputValue}) %>

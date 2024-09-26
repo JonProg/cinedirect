@@ -126,6 +126,11 @@ body{
     background-color: rgb(18, 18, 18);
 }
 
+body .link-hover:hover{
+    color: #eeeeee;
+    background-color: gray;
+}
+
 .movie-image{
     border-radius: 0.5rem;
     box-shadow: 0 0 25px 1px rgb(62, 62, 62);
@@ -220,21 +225,13 @@ body{
     color: gray;
 }
 
-.top-movies{
-    display: grid;
-    margin: 0 1.4rem;
-    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-    justify-content: center;
-    justify-items: center;
-}
-
 #footer-profile{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-weight: 500;
-    margin: 2.5rem 0;
+    margin: 3rem 0;
     font-size: 1.9rem;
     color: #eeeeee;
 }
@@ -277,11 +274,6 @@ body{
     background-color: #eeeeee;
 }
 
-.link-container a:hover{
-    color: #eeeeee;
-    background-color: gray;
-}
-
 #backdrop-movie{
     margin: 0 2.3rem;
     border-radius: 0.5rem;
@@ -308,10 +300,11 @@ body{
     display: inline-block;
     margin: 1rem 0.5rem 1rem 0;
     border-radius: 0.4rem;
-    padding: 0.5rem;
+    padding: 0.7rem 0.8rem;
     cursor: pointer;
-    color: #eeeeee;
-    background-color: gray;
+    font-weight: 500;
+    color: #000000;
+    background-color: rgb(255, 255, 255);
 }
 
 .movie-details h1{
@@ -395,4 +388,15 @@ body header{
 .page-item.active{
     color: rgb(11, 11, 11);
     background-color: #eeeeee;
+}
+
+.error-search{
+    margin: 8rem 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 2.6rem;
+    text-align: center;
+    color: #eeeeee;
 }

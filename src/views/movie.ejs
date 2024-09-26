@@ -18,7 +18,7 @@
                     <h2><%= movie.overview %></h2>
                     <h3>  
                         <%for (const genre of movie.genres) { %>
-                            <a>
+                            <a class="link-hover">
                                 <%= genre.name %>
                             </a>
                         <%}%>
@@ -33,7 +33,7 @@
             <% if (links) { %>
                 <div class="link-container">
                     <% for(const link in links) { %>
-                        <a class="linkMovie" href="<%= links[link] %>"
+                        <a class="link-hover" href="<%= links[link] %>"
                         target="_blank"><%= link %></a>
                     <% } %> 
                 </div>
