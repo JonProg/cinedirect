@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import axios from 'axios'
-import {validLink} from '../services/linksMovie'
+import {validLink} from '../services/movieServices'
 
 dotenv.config()
 
