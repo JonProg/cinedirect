@@ -9,6 +9,34 @@ const imgURL = process.env.API_IMG;
 const apiTrend = process.env.API_TREND;
 const apiTop = process.env.API_TOP20;
 
+async function filterMovie(apiRoute, params, numberPage, inputValue){
+    const resultsPerPage = 20;
+    let movies = [];
+    let currentPage = 1;
+    let totalPages = 1;
+
+    while (movies.length < numberPage * resultsPerPage+1 && currentPage <= totalPages) {
+        params.page = currentPage;
+        const response = await axios.get(apiRoute, { params: params });
+        totalPages = response.data.total_pages;
+
+        let filteredMovies = response.data.results.filter(movie => {
+            return movie.poster_path !== null &&
+                movie.popularity >= 11.7 &&
+                movie.vote_average >= 6.8 &&
+                Number(movie.release_date.slice(0, 4)) >= 1972 &&
+                movie.title.toLowerCase().includes(
+                    inputValue.toLowerCase()
+                );
+        });
+
+        movies = movies.concat(filteredMovies);
+        currentPage++;
+    }
+    return movies
+}
+
+
 class HomeController{
     async index(req,res){
 
@@ -40,9 +68,6 @@ class HomeController{
         var inputValue = req.query.movie;
         var numberPage = parseInt(req.query.page) || 1;
         const resultsPerPage = 20;
-        let allMovies = [];
-        let currentPage = 1;
-        let totalPages = 1;
 
         const params = {
             "api_key": apiKey,
@@ -52,38 +77,22 @@ class HomeController{
         }
 
         try {
-            while (allMovies.length < numberPage * resultsPerPage+1 && currentPage <= totalPages) {
-                params.page = currentPage;
-                const response = await axios.get(serchURL, { params: params });
-                totalPages = response.data.total_pages;
-    
-                let filteredMovies = response.data.results.filter(movie => {
-                    return movie.poster_path !== null &&
-                        movie.popularity >= 15.7 &&
-                        Number(movie.release_date.slice(0, 4)) >= 1972 &&
-                        movie.title.toLowerCase().includes(
-                            inputValue.toLowerCase()
-                        );
-                });
-    
-                allMovies = allMovies.concat(filteredMovies);
-                currentPage++;
-            }
-
-            let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
-            totalPages = Math.ceil(allMovies.length / resultsPerPage)
-
-            if (movies.length < 1) {
-                res.render('listMovies', { movies: false, inputValue, numberPage:false });
-            } else {
-                res.render('listMovies', { 
-                    movies, 
-                    imgURL, 
-                    totalPages, 
-                    inputValue,
-                    numberPage
-                });
-            }
+            filterMovie(serchURL, params, numberPage, inputValue).then(allMovies=>{
+                let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
+                let totalPages = Math.ceil(allMovies.length / resultsPerPage)
+                
+                if (movies.length < 1) {
+                    res.render('listMovies', { movies: false, inputValue, numberPage:false });
+                } else {
+                    res.render('listMovies', { 
+                        movies, 
+                        imgURL, 
+                        totalPages, 
+                        inputValue,
+                        numberPage
+                    });
+                }
+            })
         } catch (error) {
             console.error('Erro ao fazer a requisição GET:', error);
             res.render('index');
