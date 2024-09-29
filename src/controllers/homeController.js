@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import axios from 'axios'
+import { response } from 'express';
 
 dotenv.config()
 
@@ -17,13 +18,14 @@ async function filterMovie(apiRoute, params, numberPage, inputValue){
 
     while (movies.length < numberPage * resultsPerPage+1 && currentPage <= totalPages) {
         params.page = currentPage;
+        console.log(currentPage)
         const response = await axios.get(apiRoute, { params: params });
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter(movie => {
             return movie.poster_path !== null &&
                 movie.popularity >= 11.7 &&
-                movie.vote_average >= 6.8 &&
+                movie.vote_average >= 6 &&
                 Number(movie.release_date.slice(0, 4)) >= 1972 &&
                 movie.title.toLowerCase().includes(
                     inputValue.toLowerCase()
