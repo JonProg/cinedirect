@@ -3,10 +3,24 @@
     <a id="title-web" href="/">CineDirect</a>
     <form action="/search" method="get" class="search-form">
         <div id="input-group">
-            <input type="text" name="movie" placeholder="Pesquise seu filme..." minlength="4">
+            <input type="text" name="movie" placeholder="Pesquise seu filme..."
+            minlength="4">
             <button type="submit">
                 <i class="fa-solid fa-magnifying-glass lupa"></i>
             </button>
         </div>
     </form>
 </div>
+
+<script>
+    const input = document.getElementById('movieInput');
+    const button = document.getElementById('searchButton');
+
+    input.addEventListener('input', function() {
+        if (input.value.length >= 4) {
+            button.disabled = false;
+        } else {
+            button.disabled = true;
+        }
+    });
+</script>
