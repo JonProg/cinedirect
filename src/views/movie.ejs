@@ -18,7 +18,7 @@
                     <h2><%= movie.overview %></h2>
                     <h3>  
                         <%for (const genre of movie.genres) { %>
-                            <a class="link-hover" href="/search?genre_id=<%= genre.id %>">
+                            <a class="link-hover" href="/movie/genre/<%= genre.id %>">
                                 <%= genre.name %>
                             </a>
                         <%}%>

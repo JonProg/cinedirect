@@ -9,14 +9,13 @@ const imgURL = process.env.API_IMG;
 const apiTrend = process.env.API_TREND;
 const apiTop = process.env.API_TOP20;
 
-async function filterMovie(apiRoute, params, numberPage, inputValue){
-    const resultsPerPage = 20;
+async function filterMovie(apiRoute, params, numberPage, inputValue, resultsPerPage){
     let movies = [];
     let currentPage = 1;
     let totalPages = 1;
-    const maxPagesToFetch = 7; // Limite de páginas a serem buscadas
+    const maxPagesToFetch = 7; 
 
-    if (inputValue > Math.ceil(movies.length / resultsPerPage)) {
+    if (params.page > Math.ceil(movies.length / resultsPerPage)) {
         return false;
     }
 
@@ -88,7 +87,7 @@ class HomeController{
         }
 
         try {
-            filterMovie(serchURL, params, numberPage, inputValue).then(allMovies=>{
+            filterMovie(serchURL, params, numberPage, inputValue, resultsPerPage).then(allMovies=>{
                 let movies = allMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage);
                 let totalPages = Math.ceil(allMovies.length / resultsPerPage)
                 
