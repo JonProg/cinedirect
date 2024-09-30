@@ -22,8 +22,8 @@ const links = [
         division_url:"-",
     },
     {
-        name: "Ultra Flix",
-        link: "https://ultraflix.lat/filme/",
+        name: "Night Series",
+        link: "https://thenightseries.live/filme/",
         division_url:"-",
     },
 ];

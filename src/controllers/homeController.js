@@ -1,6 +1,5 @@
 import dotenv from 'dotenv'
 import axios from 'axios'
-import { response } from 'express';
 
 dotenv.config()
 
@@ -15,10 +14,19 @@ async function filterMovie(apiRoute, params, numberPage, inputValue){
     let movies = [];
     let currentPage = 1;
     let totalPages = 1;
+    const maxPagesToFetch = 7; // Limite de páginas a serem buscadas
 
-    while (movies.length < numberPage * resultsPerPage+1 && currentPage <= totalPages) {
+    if (inputValue > Math.ceil(movies.length / resultsPerPage)) {
+        return false;
+    }
+
+    while (movies.length < numberPage * resultsPerPage + 1 && currentPage <= totalPages) {
+
+        if (currentPage > maxPagesToFetch) {
+            break;
+        }
+
         params.page = currentPage;
-        console.log(currentPage)
         const response = await axios.get(apiRoute, { params: params });
         totalPages = response.data.total_pages;
 
@@ -27,17 +35,18 @@ async function filterMovie(apiRoute, params, numberPage, inputValue){
                 movie.popularity >= 11.7 &&
                 movie.vote_average >= 6 &&
                 Number(movie.release_date.slice(0, 4)) >= 1972 &&
-                movie.title.toLowerCase().includes(
-                    inputValue.toLowerCase()
-                );
+                movie.title.toLowerCase().includes(inputValue.toLowerCase());
         });
 
         movies = movies.concat(filteredMovies);
         currentPage++;
-    }
-    return movies
-}
 
+        if (movies.length >= numberPage * resultsPerPage) {
+            break;
+        }
+    }
+    return movies;
+}
 
 class HomeController{
     async index(req,res){
