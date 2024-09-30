@@ -13,7 +13,7 @@ async function filterMovie(apiRoute, params, numberPage, resultsPerPage){
     let movies = [];
     let currentPage = 1;
     let totalPages = 1;
-    const maxPagesToFetch = 7; 
+    const maxPagesToFetch = 10; 
 
     if (params.page > Math.ceil(movies.length / resultsPerPage)) {
         return false;
@@ -33,7 +33,9 @@ async function filterMovie(apiRoute, params, numberPage, resultsPerPage){
             return movie.poster_path !== null &&
                 movie.popularity >= 11.7 &&
                 movie.vote_average >= 6 &&
-                Number(movie.release_date.slice(0, 4)) >= 1972;
+                Number(movie.release_date.slice(0, 4)) >= 1972 &&
+                movie.original_language !== 'ko' &&
+                movie.original_language !== 'id';
         });
 
         movies = movies.concat(filteredMovies);
@@ -42,6 +44,7 @@ async function filterMovie(apiRoute, params, numberPage, resultsPerPage){
         if (movies.length >= numberPage * resultsPerPage) {
             break;
         }
+
     }
     return movies;
 }
