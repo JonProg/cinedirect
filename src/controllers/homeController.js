@@ -63,7 +63,11 @@ class HomeController{
 
             let moviesTop = topMovies.data.results.slice(0,20)
             let moviesTrend = trendMovies.data.results
-            let moviesNext = nextMovies.data.results
+
+            const currentYear = new Date().getFullYear();
+            let moviesNext = nextMovies.data.results.filter(movie => {
+                return new Date(movie.release_date).getFullYear() === currentYear;
+            });
 
             res.render('index',{
                 moviesTrend,
