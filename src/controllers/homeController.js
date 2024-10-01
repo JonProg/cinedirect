@@ -8,6 +8,7 @@ const apiKey = process.env.API_KEY;
 const imgURL = process.env.API_IMG;
 const apiTrend = process.env.API_TREND;
 const apiTop = process.env.API_TOP20;
+const apiReleases = process.env.API_RELEASES;
 
 async function filterMovie(apiRoute, params, numberPage, inputValue, resultsPerPage){
     let movies = [];
@@ -56,13 +57,18 @@ class HomeController{
         }
 
         try {
-            const trendMovies = await axios.get(apiTrend, { params: params });
-            const topMovies = await axios.get(apiTop, {params:params});
+            const trendMovies = await axios.get(apiTrend, { params : params });
+            const topMovies = await axios.get(apiTop, { params : params });
+            const nextMovies = await axios.get(apiReleases, { params : params });
+
             let moviesTop = topMovies.data.results.slice(0,20)
             let moviesTrend = trendMovies.data.results
+            let moviesNext = nextMovies.data.results
+
             res.render('index',{
                 moviesTrend,
                 moviesTop,
+                moviesNext,
                 imgURL,
             });
         } catch (error) {

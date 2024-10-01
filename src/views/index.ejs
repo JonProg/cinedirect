@@ -50,6 +50,26 @@
                     </div>
                 <%}%>
             </div>
+            <header>
+                <h2>| Lançamentos</h2>
+            </header>
+            <div class="wrapper">
+                <%for (const movie of moviesNext ) { %>
+                    <div class="movie-item">
+                        <a href="/movie/<%= movie.id %>">
+                            <img class="movie-image" src="<%= imgURL %>w200<%= movie.
+                            poster_path %>"alt="poster <%= movie.title %>"
+                            draggable="false">
+                        </a>
+                        <% if (movie.title.length < 20) { %>
+                            <p class="title-movie"><%= movie.title %></p>
+                        <% }else{ %>
+                            <p class="title-movie"><%= movie.title.
+                            slice(0,17) %>...</p>
+                        <% } %>
+                    </div>
+                <%}%>
+            </div>
         <% } %>
         <%- include('partials/_footer') %>
     </body>

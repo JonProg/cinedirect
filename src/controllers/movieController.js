@@ -7,7 +7,7 @@ dotenv.config()
 const apiMovie = process.env.API_MOVIE;
 const apiKey = process.env.API_KEY;
 const imgURL = process.env.API_IMG;
-const apiGenre = process.env.API_GENRE
+const apiGenre = process.env.API_GENRE;
 
 async function filterMovie(apiRoute, params, numberPage, resultsPerPage){
     let movies = [];
