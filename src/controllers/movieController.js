@@ -32,7 +32,7 @@ async function filterMovie(apiRoute, params, numberPage, resultsPerPage){
         let filteredMovies = response.data.results.filter(movie => {
             return movie.poster_path !== null &&
                 movie.popularity >= 11.7 &&
-                movie.vote_average >= 6 &&
+                movie.vote_average >= 5.4 &&
                 Number(movie.release_date.slice(0, 4)) >= 1972 &&
                 movie.original_language !== 'ko' &&
                 movie.original_language !== 'id';

@@ -142,8 +142,7 @@ body .link-hover:hover{
 }
 
 .wrapper{
-    margin: 0 0 0 1.4rem;
-    margin-bottom: 2.5rem;
+    margin: 0 0 7rem 1.4rem;
     scroll-behavior: smooth;
     display: flex;
     align-items: center;
