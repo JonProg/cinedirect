@@ -17,8 +17,8 @@ const links = [
         division_url:"-"
     },
     {
-        name: "Minha Serie",
-        link: "https://minhaserie.net/filme/",
+        name: "Super Flix",
+        link: "https://superflix.dev/filme/",
         division_url:"-",
     },
     {

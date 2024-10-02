@@ -4,8 +4,8 @@
     <form action="/search" method="get" class="search-form">
         <div id="input-group">
             <input type="text" name="movie" placeholder="Pesquise seu filme..."
-            minlength="4">
-            <button id="searchButton" type="submit">
+            minlength="4" id="movieInput">
+            <button id="searchButton" type="submit" disabled>
                 <i class="fa-solid fa-magnifying-glass lupa"></i>
             </button>
         </div>
@@ -17,14 +17,10 @@
         const input = document.getElementById('movieInput');
         const button = document.getElementById('searchButton');
 
-        button.disabled = true;
-
         if (input && button) {
             input.addEventListener('input', function() {
                 if (input.value.length >= 4) {
-                    button.disabled = false;
-                } else {
-                    button.disabled = true;
+                    button.disabled = false; 
                 }
             });
         }

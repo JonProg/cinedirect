@@ -85,6 +85,9 @@ class HomeController{
     };
 
     async search(req,res){
+        if (!req.query.movie){
+            return res.redirect('/')
+        }
         var inputValue = req.query.movie;
         var numberPage = parseInt(req.query.page) || 1;
         const resultsPerPage = 20;
