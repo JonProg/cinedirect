@@ -5,7 +5,7 @@
         <div id="input-group">
             <input type="text" name="movie" placeholder="Pesquise seu filme..."
             minlength="4">
-            <button type="submit">
+            <button id="searchButton" type="submit">
                 <i class="fa-solid fa-magnifying-glass lupa"></i>
             </button>
         </div>
@@ -13,14 +13,20 @@
 </div>
 
 <script>
-    const input = document.getElementById('movieInput');
-    const button = document.getElementById('searchButton');
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('movieInput');
+        const button = document.getElementById('searchButton');
 
-    input.addEventListener('input', function() {
-        if (input.value.length >= 4) {
-            button.disabled = false;
-        } else {
-            button.disabled = true;
+        button.disabled = true;
+
+        if (input && button) {
+            input.addEventListener('input', function() {
+                if (input.value.length >= 4) {
+                    button.disabled = false;
+                } else {
+                    button.disabled = true;
+                }
+            });
         }
     });
 </script>
