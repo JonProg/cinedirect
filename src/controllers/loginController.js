@@ -1,6 +1,12 @@
 import Login from '../models/loginModel'
 
 class LoginController{
+
+    async index(req,res){
+        if(req.session.user) return res.render('logon')
+        res.render('login');
+    };
+
     async register (req,res){
         try{
             const login = new Login(req.body);
@@ -23,7 +29,7 @@ class LoginController{
         }
     };
 
-    async login (req,res){
+    async logon (req,res){
         try{
             const login = new Login(req.body);
             await login.login();
