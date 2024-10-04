@@ -9,7 +9,7 @@ const LoginSchema = new mongoose.Schema({ //Fazendo o esquema no modelo
 //Fazendo um model como base no esquema
 const LoginModel = mongoose.model('Login', LoginSchema);
 
-export class login{
+export class Login{
     constructor(body){
         this.errors = [];
         this.body = body;
