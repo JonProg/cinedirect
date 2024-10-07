@@ -21,7 +21,7 @@ class App{
     routes(){
       this.app.use('/', homeRoutes);
       this.app.use('/movie', movieRoutes);
-      this.app.use('/login', loginRoutes);
+      //this.app.use('/login', loginRoutes);
     }
 
     setters(){
