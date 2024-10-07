@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import homeRoutes from 'src/routes/homeRoutes.js';
-import movieRoutes from 'src/routes/movieRoutes.js';
+import homeRoutes from './src/routes/homeRoutes.js';
+import movieRoutes from './src/routes/movieRoutes.js';
 import express from 'express';
 
 dotenv.config();
