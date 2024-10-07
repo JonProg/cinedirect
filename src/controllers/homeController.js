@@ -49,39 +49,8 @@ async function filterMovie(apiRoute, params, numberPage, inputValue, resultsPerP
 }
 
 class HomeController{
-    async index(req,res){
-
-        const params = {
-            "api_key" : apiKey,
-            "language" : "pt-BR", 
-        }
-
-        try {
-            const trendMovies = await axios.get(apiTrend, { params : params });
-            const topMovies = await axios.get(apiTop, { params : params });
-            const nextMovies = await axios.get(apiReleases, { params : params });
-
-            let moviesTop = topMovies.data.results.slice(0,20)
-            let moviesTrend = trendMovies.data.results
-
-            const currentYear = new Date().getFullYear();
-            let moviesNext = nextMovies.data.results.filter(movie => {
-                return new Date(movie.release_date).getFullYear() === currentYear;
-            });
-
-            res.render('index',{
-                moviesTrend,
-                moviesTop,
-                moviesNext,
-                imgURL,
-            });
-        } catch (error) {
-            res.send(`
-                <h1>Ocorreu um erro</h1>
-                <p>${error.message}</p>
-                <pre>${error.stack}</pre>
-            `);
-        }
+    index(req,res){
+        return res.send("Que merda em")
     };
 
     async search(req,res){
