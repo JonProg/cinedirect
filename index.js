@@ -1,11 +1,5 @@
+import app from './app';
 import dotenv from 'dotenv';
-import express from 'express';
-
-const app = express()
-
-app.use("/", function(req,res){
-  res.json("seu merda 2")
-})
 
 dotenv.config();
 
