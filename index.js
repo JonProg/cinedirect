@@ -1,5 +1,11 @@
-import app from './app';
 import dotenv from 'dotenv';
+import homeRoutes from './src/routes/homeRoutes';
+import movieRoutes from './src/routes/movieRoutes';
+import express from 'express';
+
+const app = express()
+
+app.use("/", homeRoutes)
 
 dotenv.config();
 
