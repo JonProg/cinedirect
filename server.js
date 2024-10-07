@@ -1,14 +1,12 @@
+import app from './app';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
-import express from 'express';
-
-const app = express()
-
-app.use("/", function(req,res){
-  res.send("Server é o caramba")
-})
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`Acess http://localhost:${port}`);
+  console.log(`Acess http://localhost: ${port}`);
   console.log(`Server online on port ${port}...`);
 });
+    
