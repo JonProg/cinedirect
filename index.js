@@ -5,7 +5,9 @@ import express from 'express';
 
 const app = express()
 
-app.use("/", homeRoutes)
+app.use("/", function(req,res){
+  res.json("seu merda 3")
+})
 
 dotenv.config();
 
