@@ -3,7 +3,9 @@ import homeController from '../controllers/homeController';
 
 const router = new Router();
 
-router.get('/', homeController.index);
-router.get('/search', homeController.search);
+router.get('/', (req, res) => {
+    res.json('Lista de filmes');
+  })
+
 
 export default router;
