@@ -1,9 +1,11 @@
 import mongoose from "mongoose"
 import bcryptjs from "bcryptjs";
+//import { type } from "express/lib/response";
 
 const LoginSchema = new mongoose.Schema({ //Fazendo o esquema no modelo
     email:{type:String, required:true},
     password:{type:String, required:true},
+    likedMovies:{type:[Number], default:[]},
 });
 
 //Fazendo um model como base no esquema
