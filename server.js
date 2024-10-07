@@ -1,7 +1,12 @@
 import app from './app';
+import dotenv from 'dotenv';
 
-app.listen(3000, () => {
-  console.log('Acess http://localhost:3000');
-  console.log('Server online on port 3000...');
+dotenv.config();
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Acess http://localhost: ${port}`);
+  console.log(`Server online on port ${port}...`);
 });
     
