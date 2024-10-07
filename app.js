@@ -1,5 +1,5 @@
 import express from 'express';
-import homeRoutes from './homeRoutes';
+import homeRoutes from './src/routes/homeRoutes';
 import movieRoutes from './src/routes/movieRoutes';
 import {resolve} from 'path';
 

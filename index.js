@@ -1,12 +1,13 @@
 import dotenv from 'dotenv';
-import homeRoutes from './homeRoutes'
 import express from 'express';
 
 dotenv.config();
 
 const app = express()
 
-app.use("/", homeRoutes)
+app.use("/", function(req,res){
+  res.json("seu merda 2")
+})
 
 const port = process.env.PORT || 3000;
 
