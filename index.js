@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import homeRoutes from '../CineDirect/src/routes/homeRoutes';
 import express from 'express';
 
 dotenv.config();
