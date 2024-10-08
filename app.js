@@ -28,7 +28,8 @@ class App{
     }
   
     routes(){
-      this.app.get('/',async function(req,res){
+      this.app.get('/', async function(req,res){
+        
         const params = {
           "api_key" : apiKey,
           "language" : "pt-BR", 
@@ -47,20 +48,16 @@ class App{
                 return new Date(movie.release_date).getFullYear() === currentYear;
             });
 
-            res.render('index',{
+            res.json({
                 moviesTrend,
                 moviesTop,
                 moviesNext,
                 imgURL,
             });
         } catch (error) {
-          res.send(`
-              <h1>Ocorreu um erro</h1>
-              <p>${error.message}</p>
-              <pre>${error.stack}</pre>
-          `);
-      }
-    });
+            res.send(`${error.message}`);
+        }
+      });
       this.app.use('/movie', movieRoutes);
     }
 
