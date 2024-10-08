@@ -16,7 +16,7 @@ class App{
     }
   
     routes(){
-      this.app.get('/', function(req,res){
+      this.app.use('/', function(req,res){
         return res.json("sdfsdfsdf");
       });
       this.app.use('/movie', movieRoutes);
