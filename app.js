@@ -1,17 +1,11 @@
 import express from 'express';
 import {resolve} from 'path';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import axios from 'axios';
+import dotenv from 'dotenv'
+import axios from 'axios'
 
 dotenv.config()
 
-const serchURL = process.env.API_SEARCH;
-const apiKey = process.env.API_KEY;
 const imgURL = process.env.API_IMG;
-const apiTrend = process.env.API_TREND;
-const apiTop = process.env.API_TOP20;
-const apiReleases = process.env.API_RELEASES;
 
 class App{
     constructor() {
@@ -24,11 +18,11 @@ class App{
     middlewares(){
       this.app.use(express.urlencoded({ extended: true }));
       this.app.use(express.json());
-      this.app.use(cors());
+      this.app.use(express.static(resolve(__dirname, 'src','assets')));
     }
   
     routes(){
-      this.app.get('/',  async function(req,res){
+      this.app.use('/', function(req,res){
         return res.json({test:imgURL})
       });
       this.app.use('/movie', movieRoutes);
