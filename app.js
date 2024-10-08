@@ -34,7 +34,7 @@ class App{
           "language" : "pt-BR", 
         }
         const trendMovies = await axios.get(apiTrend, { params : params });
-        return res.json({test:trendMovies})
+        return res.json({test:imgURL})
       });
       this.app.use('/movie', movieRoutes);
     }
