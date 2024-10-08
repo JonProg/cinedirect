@@ -4,6 +4,8 @@ import {resolve} from 'path';
 
 dotenv.config()
 
+const imgURL = process.env.API_IMG;
+
 class App{
     constructor() {
       this.app = express();
