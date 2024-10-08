@@ -3,8 +3,6 @@ import express from 'express';
 import {resolve} from 'path';
 
 
-dotenv.config()
-
 class App{
     constructor() {
       this.app = express();
