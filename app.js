@@ -1,11 +1,9 @@
 import express from 'express';
-import dotenv from 'dotenv'
+
 import {resolve} from 'path';
-import axios from 'axios'
+
 
 dotenv.config()
-
-
 
 class App{
     constructor() {
