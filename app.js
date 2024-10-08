@@ -1,6 +1,9 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import {resolve} from 'path';
 import cors from 'cors';
+
+dotenv.config();
 
 class App{
     constructor() {
@@ -19,7 +22,7 @@ class App{
   
     routes(){
       this.app.get('/', function(req,res){
-        return res.json("sdfsdfsdf");
+        return res.json("seu bosta");
       });
       this.app.use('/movie', movieRoutes);
     }
