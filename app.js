@@ -22,7 +22,7 @@ class App{
   
     routes(){
       this.app.get('/', function(req,res){
-        return res.json("seu bosta");
+        return res.json("seu bosta 4");
       });
     }
 
