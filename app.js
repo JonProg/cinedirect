@@ -1,11 +1,5 @@
 import express from 'express';
 import {resolve} from 'path';
-import dotenv from 'dotenv'
-import axios from 'axios'
-
-dotenv.config()
-
-const imgURL = process.env.API_IMG;
 
 class App{
     constructor() {
@@ -23,7 +17,7 @@ class App{
   
     routes(){
       this.app.get('/', function(req,res){
-        return res.json("sdfsdfsdf")
+        return res.json("sdfsdfsdf");
       });
       this.app.use('/movie', movieRoutes);
     }
