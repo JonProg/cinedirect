@@ -28,14 +28,19 @@ class App{
     }
   
     routes(){
-      this.app.get('/', function(req,res){
-        return res.render('test')
+      this.app.get('/',  async function(req,res){
+        const params = {
+          "api_key" : apiKey,
+          "language" : "pt-BR", 
+        }
+        const trendMovies = await axios.get(apiTrend, { params : params });
+        return res.json({test:trendMovies})
       });
       this.app.use('/movie', movieRoutes);
     }
 
     setters(){
-      this.app.set('views', resolve(__dirname,'views'));
+      this.app.set('views', resolve(__dirname,'src','views'));
       this.app.set('view engine','ejs'); //Serve para adicinar a logica do js no html
     }
   
