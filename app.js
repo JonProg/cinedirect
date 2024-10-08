@@ -29,11 +29,6 @@ class App{
   
     routes(){
       this.app.get('/',  async function(req,res){
-        const params = {
-          "api_key" : apiKey,
-          "language" : "pt-BR", 
-        }
-        const trendMovies = await axios.get(apiTrend, { params : params });
         return res.json({test:imgURL})
       });
       this.app.use('/movie', movieRoutes);
