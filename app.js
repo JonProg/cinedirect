@@ -22,7 +22,7 @@ class App{
   
     routes(){
       this.app.use('/', function(req,res){
-        return res.json("seu merda 3:")
+        return res.json({seu_merda:imgURL})
       });
       //this.app.use('/movie', movieRoutes);
     }
