@@ -1,5 +1,6 @@
 import express from 'express';
 import {resolve} from 'path';
+import cors from 'cors';
 
 class App{
     constructor() {
@@ -12,11 +13,12 @@ class App{
     middlewares(){
       this.app.use(express.urlencoded({ extended: true }));
       this.app.use(express.json());
-      this.app.use(express.static(resolve(__dirname, 'src','assets')));
+      this.app.use(express.static(resolve(__dirname, 'src','assets')))
+      this.app.use(cors());
     }
   
     routes(){
-      this.app.use('/', function(req,res){
+      this.app.get('/', function(req,res){
         return res.json("sdfsdfsdf");
       });
       this.app.use('/movie', movieRoutes);
