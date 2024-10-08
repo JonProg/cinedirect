@@ -29,7 +29,7 @@ class App{
   
     routes(){
       this.app.get('/', async function(req,res){
-        
+
         const params = {
           "api_key" : apiKey,
           "language" : "pt-BR", 
@@ -49,10 +49,10 @@ class App{
             });
 
             res.json({
-                moviesTrend,
-                moviesTop,
-                moviesNext,
-                imgURL,
+                test:moviesTrend,
+                tyu:moviesTop,
+                dfghdfh:moviesNext,
+                sdfgds:imgURL,
             });
         } catch (error) {
             res.send(`${error.message}`);
