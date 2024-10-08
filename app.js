@@ -1,7 +1,16 @@
 import express from 'express';
-import homeRoutes from './src/routes/homeRoutes';
-import movieRoutes from './src/routes/movieRoutes';
+import dotenv from 'dotenv'
 import {resolve} from 'path';
+import axios from 'axios'
+
+dotenv.config()
+
+const serchURL = process.env.API_SEARCH;
+const apiKey = process.env.API_KEY;
+const imgURL = process.env.API_IMG;
+const apiTrend = process.env.API_TREND;
+const apiTop = process.env.API_TOP20;
+const apiReleases = process.env.API_RELEASES;
 
 class App{
     constructor() {
@@ -19,7 +28,7 @@ class App{
   
     routes(){
       this.app.use('/', function(req,res){
-        return res.json("seu merda 3")
+        return res.json(`seu merda 3:${apiTop}`)
       });
       //this.app.use('/movie', movieRoutes);
     }
