@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import axios from 'axios'
 import {resolve} from 'path';
 
+dotenv.config()
+
 const serchURL = process.env.API_SEARCH;
 const apiKey = process.env.API_KEY;
 const imgURL = process.env.API_IMG;
