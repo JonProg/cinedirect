@@ -1,13 +1,18 @@
+import app from './app'
 import dotenv from 'dotenv';
-import express from 'express';
+//import express from 'express';
 
 dotenv.config();
 
-const app = express()
+//colocar as envs aqui e todo backend tambem
+//fazer uma separação entre o backend
+//e frontend
 
-app.use("/", function(req,res){
-  res.json("seu merda 2")
-})
+//const app = express()
+
+//app.use("/", function(req,res){
+  //res.json("seu merda 2")
+//})
 
 const port = process.env.PORT || 3000;
 

@@ -1,6 +1,6 @@
 import express from 'express';
-import homeRoutes from './src/routes/homeRoutes';
-import movieRoutes from './src/routes/movieRoutes';
+//import homeRoutes from './src/routes/homeRoutes';
+//import movieRoutes from './src/routes/movieRoutes';
 import {resolve} from 'path';
 
 class App{
@@ -18,8 +18,10 @@ class App{
     }
   
     routes(){
-      this.app.use('/', homeRoutes);
-      this.app.use('/movie', movieRoutes);
+      this.app.use('/', function(req,res){
+        return res.json("seu merda 3")
+      });
+      //this.app.use('/movie', movieRoutes);
     }
 
     setters(){
