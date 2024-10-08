@@ -28,7 +28,7 @@ class App{
   
     routes(){
       this.app.use('/', function(req,res){
-        return res.json(`seu merda 3:${apiTop}`)
+        return res.json("seu merda 3:")
       });
       //this.app.use('/movie', movieRoutes);
     }
