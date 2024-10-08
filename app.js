@@ -1,7 +1,17 @@
 import express from 'express';
-import homeRoutes from './src/routes/homeRoutes';
-import movieRoutes from './src/routes/movieRoutes';
 import {resolve} from 'path';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import axios from 'axios';
+
+dotenv.config()
+
+const serchURL = process.env.API_SEARCH;
+const apiKey = process.env.API_KEY;
+const imgURL = process.env.API_IMG;
+const apiTrend = process.env.API_TREND;
+const apiTop = process.env.API_TOP20;
+const apiReleases = process.env.API_RELEASES;
 
 class App{
     constructor() {
@@ -14,11 +24,43 @@ class App{
     middlewares(){
       this.app.use(express.urlencoded({ extended: true }));
       this.app.use(express.json());
-      this.app.use(express.static(resolve(__dirname, 'src','assets')));
+      this.app.use(cors());
     }
   
     routes(){
-      this.app.use('/', homeRoutes);
+      this.app.get('/',async function(req,res){
+        const params = {
+          "api_key" : apiKey,
+          "language" : "pt-BR", 
+        }
+
+        try {
+            const trendMovies = await axios.get(apiTrend, { params : params });
+            const topMovies = await axios.get(apiTop, { params : params });
+            const nextMovies = await axios.get(apiReleases, { params : params });
+
+            let moviesTop = topMovies.data.results.slice(0,20)
+            let moviesTrend = trendMovies.data.results
+
+            const currentYear = new Date().getFullYear();
+            let moviesNext = nextMovies.data.results.filter(movie => {
+                return new Date(movie.release_date).getFullYear() === currentYear;
+            });
+
+            res.render('index',{
+                moviesTrend,
+                moviesTop,
+                moviesNext,
+                imgURL,
+            });
+        } catch (error) {
+          res.send(`
+              <h1>Ocorreu um erro</h1>
+              <p>${error.message}</p>
+              <pre>${error.stack}</pre>
+          `);
+      }
+    });
       this.app.use('/movie', movieRoutes);
     }
 
