@@ -28,41 +28,14 @@ class App{
     }
   
     routes(){
-      this.app.get('/', async function(req,res){
-
-        const params = {
-          "api_key" : apiKey,
-          "language" : "pt-BR", 
-        }
-
-        try {
-            const trendMovies = await axios.get(apiTrend, { params : params });
-            const topMovies = await axios.get(apiTop, { params : params });
-            const nextMovies = await axios.get(apiReleases, { params : params });
-
-            let moviesTop = topMovies.data.results.slice(0,20)
-            let moviesTrend = trendMovies.data.results
-
-            const currentYear = new Date().getFullYear();
-            let moviesNext = nextMovies.data.results.filter(movie => {
-                return new Date(movie.release_date).getFullYear() === currentYear;
-            });
-
-            res.json({
-                test:moviesTrend,
-                tyu:moviesTop,
-                dfghdfh:moviesNext,
-                sdfgds:imgURL,
-            });
-        } catch (error) {
-            res.send(`${error.message}`);
-        }
+      this.app.get('/', function(req,res){
+        return res.render('test')
       });
       this.app.use('/movie', movieRoutes);
     }
 
     setters(){
-      this.app.set('views', resolve(__dirname,'src','views'));
+      this.app.set('views', resolve(__dirname,'views'));
       this.app.set('view engine','ejs'); //Serve para adicinar a logica do js no html
     }
   
