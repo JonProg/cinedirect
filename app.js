@@ -1,7 +1,7 @@
 import express from 'express';
-import dotenv from 'dotenv'
-import homeRoutes from './src/routes/homeRoutes'
+import dotenv from 'dotenv';
 import {resolve} from 'path';
+import homeRoutes from resolve(__dirname, './src/routes/homeRoutes');
 
 dotenv.config()
 
