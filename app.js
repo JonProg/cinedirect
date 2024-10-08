@@ -1,7 +1,8 @@
 import express from 'express';
-
+import dotenv from 'dotenv'
 import {resolve} from 'path';
 
+dotenv.config()
 
 class App{
     constructor() {
