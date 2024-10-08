@@ -1,15 +1,7 @@
 import express from 'express';
-import dotenv from 'dotenv';
+import homeRoutes from './src/routes/homeRoutes';
+import movieRoutes from './src/routes/movieRoutes';
 import {resolve} from 'path';
-
-dotenv.config()
-
-const serchURL = process.env.API_SEARCH;
-const apiKey = process.env.API_KEY;
-const imgURL = process.env.API_IMG;
-const apiTrend = process.env.API_TREND;
-const apiTop = process.env.API_TOP20;
-const apiReleases = process.env.API_RELEASES;
 
 class App{
     constructor() {
@@ -26,10 +18,8 @@ class App{
     }
   
     routes(){
-      this.app.use('/', function(req,res){
-        return res.json({seu_merda:imgURL})
-      });
-      //this.app.use('/movie', movieRoutes);
+      this.app.use('/', homeRoutes);
+      this.app.use('/movie', movieRoutes);
     }
 
     setters(){
