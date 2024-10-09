@@ -39,7 +39,7 @@ function ListMovies() {
         }
 
         params.page = currentPage;
-        const response = await axios.get(apiRoute, { params: params });
+        const response = await axios.get(apiRoute, { params });
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter((movie) => {
@@ -66,6 +66,10 @@ function ListMovies() {
 
     fetchMovies(route, params, page, 20); // Passamos '20' como limite de filmes
   }, [route, params, page]);
+
+  if (movies.length < 1){
+    return navigate('/')
+  }
 
   return (
     <>

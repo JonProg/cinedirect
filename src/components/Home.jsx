@@ -23,9 +23,9 @@ function Home(){
   useEffect(()=>{
     const axiosMovies = async () => {
       try {
-        const trendMovies = await axios.get(apiTrend, { params : params });
-        const topMovies = await axios.get(apiTop, { params : params });
-        const nextMovies = await axios.get(apiReleases, { params : params });
+        const trendMovies = await axios.get(apiTrend, { params });
+        const topMovies = await axios.get(apiTop, { params });
+        const nextMovies = await axios.get(apiReleases, { params });
         const currentYear = new Date().getFullYear();
   
         setTopMovies(topMovies.data.results.slice(0,20))

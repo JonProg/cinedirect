@@ -255,6 +255,11 @@ body .link-hover:hover{
     margin-top: 2.7rem;
 }
 
+#movie-links p{
+    margin-top: 1rem;
+    font-size: 1.9rem;
+}
+
 .link-container{
     display: flex;
     flex-wrap: wrap;
@@ -306,21 +311,26 @@ body .link-hover:hover{
     background-color: rgb(255, 255, 255);
 }
 
-.movie-details h1{
+.movie-info h1{
     font-size: 3.3rem;
     font-weight: 500;
 }
 
-.movie-details h2{
-    font-size: 1.4rem;
+.movie-info p{
+    font-size: 1.5rem;
+    margin: 1rem 0;
     font-weight: 400;
     max-width: 50rem;
     min-width: 10rem;
 }
 
-.movie-details h3{
+.genre{
     font-size: 1.5rem;
     font-weight: 300;
+}
+
+.genre a{
+    margin-right: 1.3rem;
 }
 
 
