@@ -231,13 +231,13 @@ body .link-hover:hover{
     align-items: center;
     font-weight: 500;
     margin: 3rem 0;
-    font-size: 1.9rem;
+    font-size: 2rem;
     color: #eeeeee;
 }
 
 .links-profile a{
     font-size: 2.7rem;
-    margin: 0 0.3rem;
+    margin: 0 0.65rem;
 }
 
 .links-profile{
