@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Search from "./Search";
 import Footer from "./Footer";
+import Pagination from "./Pagination";
 
 const apiSearch = import.meta.env.VITE_API_SEARCH;
 const apiKey = import.meta.env.VITE_API_KEY;
@@ -12,19 +13,21 @@ function ListMovies() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const movie = searchParams.get("movie");
+  const inputValue = searchParams.get("movie") || false;
   const genre = searchParams.get("genre") || false;
   const page = searchParams.get("page") || 1;
 
   let route = genre !== false ? apiGenre : apiSearch;
+
   const params = {
     "api_key": apiKey,
     "include_adult": false,
     "language": "pt-BR",
   };
 
-  genre !== false ? (params.with_genres = genre) : (params.query = movie);
+  genre !== false ? (params.with_genres = genre) : (params.query = inputValue);
 
   useEffect(() => {
     const fetchMovies = async (apiRoute, params, numberPage, resultsPerPage) => {
@@ -43,7 +46,7 @@ function ListMovies() {
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter((movie) => {
-          return (
+          let isValidMovie = (
             movie.poster_path !== null &&
             movie.popularity >= 11.7 &&
             movie.vote_average >= 5.4 &&
@@ -51,21 +54,28 @@ function ListMovies() {
             movie.original_language !== "ko" &&
             movie.original_language !== "id"
           );
+
+          if(inputValue){
+            isValidMovie = isValidMovie && movie.title.toLowerCase().includes(inputValue.toLowerCase());
+          }
+
+          return isValidMovie;
         });
 
         movies = movies.concat(filteredMovies);
         currentPage++;
 
         if (movies.length >= numberPage * resultsPerPage) {
-          movies = movies.slice(0, numberPage * resultsPerPage); // Limita ao número de filmes desejado
           break;
         }
       }
-      setMovies(movies);
+      //console.log(movies.length)
+      console.log(Math.ceil(movies.length / resultsPerPage))
+      setMovies(movies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage));
+      setTotalPages(Math.ceil(movies.length / resultsPerPage))
     };
-
-    fetchMovies(route, params, page, 20); // Passamos '20' como limite de filmes
-  }, [route, params, page]);
+    fetchMovies(route, params, page, 20); 
+  }, [inputValue,page]);
 
   if (movies.length < 1){
     return navigate('/')
@@ -91,6 +101,12 @@ function ListMovies() {
             </div>
         ))}
         </div>
+        <Pagination
+        numberPage={page}
+        totalPages={totalPages} 
+        inputValue={inputValue}
+        genreValue={genre}
+        />
         <Footer />
     </>
     );

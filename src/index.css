@@ -380,6 +380,7 @@ body header{
 }
 
 .page-item{
+    cursor: pointer;
     height: 3.5rem;
     width: 3.5rem;
     display: flex;
@@ -398,6 +399,7 @@ body header{
     color: rgb(11, 11, 11);
     background-color: #eeeeee;
 }
+
 
 .error-search{
     margin: 8rem 0;

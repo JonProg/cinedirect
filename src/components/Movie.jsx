@@ -61,7 +61,7 @@ function Movie() {
                             <a
                                 key={genre.id}
                                 className="link-hover"
-                                href={`/movie/genre/${genre.id}`}
+                                href={`/search?genre=${genre.id}`}
                             >
                                 {genre.name}
                             </a>
