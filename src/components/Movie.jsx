@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { FourSquare } from "react-loading-indicators";
 import Search from './Search';
 import Footer from './Footer';
 import axios from 'axios';
 
-const apiKey = import.meta.env.VITE_API_KEY;
-const apiMovie = import.meta.env.VITE_API_MOVIE;
 const imgURL = import.meta.env.VITE_API_IMG;
 
 function Movie() {
@@ -14,16 +13,10 @@ function Movie() {
     const [movie, setMovie] = useState(null); 
     const [links, setLinks] = useState(null); 
 
-    const params = {
-        api_key: apiKey,
-        include_adult: false,
-        language: 'pt-BR',
-    };
-
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const response = await axios.get(`${apiMovie}${id}`, { params });
+                const response = await axios.get(`http://localhost:4000/api/movie/${id}`);
                 const movieData = response.data;
                 const movieLinks = await axios.post('http://localhost:4000/api/valid-links', {
                     "movieTitle":movieData.title,
@@ -41,7 +34,11 @@ function Movie() {
     }, []); 
 
     if (!movie) {
-        return <p>Carregando...</p>; 
+        return (
+            <div className="loading-container">
+                <FourSquare color="white" size="medium" text="" textColor="" />; 
+            </div>
+        )
     }
 
     return (

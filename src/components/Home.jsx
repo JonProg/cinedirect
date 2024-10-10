@@ -1,48 +1,38 @@
-import axios from 'axios'
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Search from './Search';
 import Footer from './Footer';
-
-const apiKey = import.meta.env.VITE_API_KEY;
-const apiTrend = import.meta.env.VITE_API_TREND;
-const apiTop = import.meta.env.VITE_API_TOP20;
-const apiReleases = import.meta.env.VITE_API_RELEASES;
 const imgURL = import.meta.env.VITE_API_IMG;
 
 function Home(){
-  const [topMovies,setTopMovies] = useState();
-  const [trendMovies,setTrendMovies] = useState();
-  const [nextMovies,setNextMovies] = useState();
+  const [topMovies, setTopMovies] = useState();
+  const [trendMovies, setTrendMovies] = useState();
+  const [nextMovies, setNextMovies] = useState();
   const [loading, setLoading] = useState(true);
 
-  const params = {
-    "api_key" : apiKey,
-    "language" : "pt-BR", 
-  }
-
-  useEffect(()=>{
-    const axiosMovies = async () => {
+  useEffect(() => {
+    const fetchMovies = async () => {
       try {
-        const trendMovies = await axios.get(apiTrend, { params });
-        const topMovies = await axios.get(apiTop, { params });
-        const nextMovies = await axios.get(apiReleases, { params });
+        const trendResponse = await axios.get('http://localhost:4000/api/trending');
+        const topResponse = await axios.get('http://localhost:4000/api/top');
+        const nextResponse = await axios.get('http://localhost:4000/api/releases');
         const currentYear = new Date().getFullYear();
-  
-        setTopMovies(topMovies.data.results.slice(0,20))
-        setTrendMovies(trendMovies.data.results)
-  
-        setNextMovies(nextMovies.data.results.filter(movie => {
-            return new Date(movie.release_date).getFullYear() === currentYear;
+
+        setTopMovies(topResponse.data.results.slice(0, 20));
+        setTrendMovies(trendResponse.data.results);
+
+        setNextMovies(nextResponse.data.results.filter((movie) => {
+          return new Date(movie.release_date).getFullYear() === currentYear;
         }));
 
         setLoading(false);
       } catch (error) {
-          console.error('Error in search movies:', error);
-          setLoading(false);
+        console.error('Error fetching movies:', error);
+        setLoading(false);
       }
     };
 
-    axiosMovies();
+    fetchMovies();
   }, []);
 
   if (loading) {

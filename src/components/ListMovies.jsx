@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
 import Search from "./Search";
 import Footer from "./Footer";
 import Pagination from "./Pagination";
-
-const apiSearch = import.meta.env.VITE_API_SEARCH;
-const apiKey = import.meta.env.VITE_API_KEY;
-const apiGenre = import.meta.env.VITE_API_GENRE;
 
 function ListMovies() {
   const navigate = useNavigate();
@@ -15,22 +11,18 @@ function ListMovies() {
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
 
-  const inputValue = searchParams.get("movie") || false;
+  const query = searchParams.get("movie") || false;
   const genre = searchParams.get("genre") || false;
   const page = searchParams.get("page") || 1;
 
-  let route = genre !== false ? apiGenre : apiSearch;
-
   const params = {
-    "api_key": apiKey,
-    "include_adult": false,
-    "language": "pt-BR",
-  };
-
-  genre !== false ? (params.with_genres = genre) : (params.query = inputValue);
+    query,
+    genre,
+    page
+  }
 
   useEffect(() => {
-    const fetchMovies = async (apiRoute, params, numberPage, resultsPerPage) => {
+    const fetchMovies = async (params, numberPage, resultsPerPage) => {
       let movies = [];
       let currentPage = 1;
       let totalPages = 1;
@@ -42,7 +34,7 @@ function ListMovies() {
         }
 
         params.page = currentPage;
-        const response = await axios.get(apiRoute, { params });
+        const response = await axios.get('http://localhost:4000/api/movies', { params });
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter((movie) => {
@@ -55,13 +47,13 @@ function ListMovies() {
             movie.original_language !== "id"
           );
 
-          if(inputValue){
-            isValidMovie = isValidMovie && movie.title.toLowerCase().includes(inputValue.toLowerCase());
+          if(query){
+            isValidMovie = isValidMovie && movie.title.toLowerCase().includes(query.toLowerCase());
           }
 
           return isValidMovie;
         });
-
+        
         movies = movies.concat(filteredMovies);
         currentPage++;
 
@@ -69,13 +61,19 @@ function ListMovies() {
           break;
         }
       }
-      //console.log(movies.length)
-      console.log(Math.ceil(movies.length / resultsPerPage))
-      setMovies(movies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage));
-      setTotalPages(Math.ceil(movies.length / resultsPerPage))
+      const uniqueMovies = Array.from(new Set(movies.map(movie => movie.id)))
+        .map(id => {
+          return movies.find(movie => movie.id === id);
+      });
+
+      const start = (numberPage - 1) * resultsPerPage;
+      console.log(start)
+
+      setMovies(uniqueMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage));
+      setTotalPages(Math.ceil(uniqueMovies.length / resultsPerPage))
     };
-    fetchMovies(route, params, page, 20); 
-  }, [inputValue,page]);
+    fetchMovies(params, page, 20); 
+  }, [query, page]);
 
   if (movies.length < 1){
     return navigate('/')
@@ -104,7 +102,7 @@ function ListMovies() {
         <Pagination
         numberPage={page}
         totalPages={totalPages} 
-        inputValue={inputValue}
+        inputValue={query}
         genreValue={genre}
         />
         <Footer />

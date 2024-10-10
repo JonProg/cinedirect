@@ -296,6 +296,11 @@ body .link-hover:hover{
     justify-content: flex-start;
 }
 
+.movie-details img{
+    width: 25rem;
+    height: 35rem;
+}
+
 .movie-info{
     margin-left: 1.8rem;
 }
@@ -325,7 +330,7 @@ body .link-hover:hover{
 }
 
 .genre{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 300;
 }
 
@@ -411,3 +416,11 @@ body header{
     text-align: center;
     color: #eeeeee;
 }
+
+.loading-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+}
+  
