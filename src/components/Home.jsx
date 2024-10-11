@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Search from './Search';
 import Footer from './Footer';
-const imgURL = import.meta.env.VITE_API_IMG;
+
+const imgURL = 'https://image.tmdb.org/t/p/';
 
 function Home(){
   const [topMovies, setTopMovies] = useState();

@@ -5,13 +5,14 @@ import Search from './Search';
 import Footer from './Footer';
 import axios from 'axios';
 
-const imgURL = import.meta.env.VITE_API_IMG;
+const imgURL = 'https://image.tmdb.org/t/p/';
 
 function Movie() {
     const navigate = useNavigate();
     const { id } = useParams(); 
     const [movie, setMovie] = useState(null); 
     const [links, setLinks] = useState(null); 
+
 
     useEffect(() => {
         const fetchMovie = async () => {
