@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Search from './Search';
 import Footer from './Footer';
 
@@ -49,14 +50,14 @@ function Home(){
       <div className="wrapper">
         {trendMovies.map((movie) => (
           <div className="movie-item" key={movie.id}>
-            <a href={`/movie/${movie.id}`}>
+            <Link to={`/movie/${movie.id}`}>
               <img
                 className="movie-image"
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
               />
-            </a>
+            </Link>
             <p className="title-movie">
               {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
             </p>
@@ -70,14 +71,14 @@ function Home(){
       <div className="wrapper">
         {topMovies.map((movie) => (
           <div className="movie-item" key={movie.id}>
-            <a href={`/movie/${movie.id}`}>
+            <Link to={`/movie/${movie.id}`}>
               <img
                 className="movie-image"
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
               />
-            </a>
+            </Link>
             <p className="title-movie">
               {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
             </p>
@@ -91,14 +92,14 @@ function Home(){
       <div className="wrapper">
         {nextMovies.map((movie) => (
           <div className="movie-item" key={movie.id}>
-            <a href={`/movie/${movie.id}`}>
+            <Link to={`/movie/${movie.id}`}>
               <img
                 className="movie-image"
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
               />
-            </a>
+            </Link>
             <p className="title-movie">
               {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
             </p>
