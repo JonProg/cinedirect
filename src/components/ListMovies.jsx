@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams} from "react-router-dom";
+import { Link, useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
 import Search from "./Search";
 import Footer from "./Footer";
@@ -85,14 +85,14 @@ function ListMovies() {
         <div className="grid-movies">
         {movies.map((movie) => (
             <div className="movie-item" key={movie.id}>
-            <a href={`/movie/${movie.id}`}>
+            <Link to={`/movie/${movie.id}`}>
                 <img
                 className="movie-image"
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={`poster ${movie.title}`}
                 draggable="false"
                 />
-            </a>
+            </Link>
             <p className="title-movie">
                 {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
             </p>

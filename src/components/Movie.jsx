@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FourSquare } from "react-loading-indicators";
 import Search from './Search';
 import Footer from './Footer';
@@ -56,13 +56,13 @@ function Movie() {
                     <p>{movie.overview}</p>
                     <div className='genre'>
                         {movie.genres.map((genre) => (
-                            <a
+                            <Link
                                 key={genre.id}
                                 className="link-hover"
-                                href={`/search?genre=${genre.id}`}
+                                to={`/search?genre=${genre.id}`}
                             >
                                 {genre.name}
-                            </a>
+                            </Link>
                         ))}
                     </div>
                 </div>
