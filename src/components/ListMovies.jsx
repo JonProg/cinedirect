@@ -94,9 +94,11 @@ function ListMovies() {
                 draggable="false"
                 />
             </Link>
+            <Link to={`/movie/${movie.id}`}>
             <p className="title-movie">
                 {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
             </p>
+            </Link>
             </div>
         ))}
         </div>
