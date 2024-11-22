@@ -34,7 +34,7 @@ function ListMovies() {
         }
 
         params.page = currentPage;
-        const response = await axios.get('https://cinedirect-api.vercel.app/api/movies', { params });
+        const response = await axios.get('http://127.0.0.1:4000/api/movies', { params });
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter((movie) => {
@@ -44,7 +44,8 @@ function ListMovies() {
             movie.vote_average >= 5.4 &&
             Number(movie.release_date.slice(0, 4)) >= 1972 &&
             movie.original_language !== "ko" &&
-            movie.original_language !== "id"
+            movie.original_language !== "id" &&
+            movie.original_language !== "cn" 
           );
 
           if(query){
