@@ -67,9 +67,6 @@ function ListMovies() {
           return movies.find(movie => movie.id === id);
       });
 
-      const start = (numberPage - 1) * resultsPerPage;
-      console.log(start)
-
       setMovies(uniqueMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage));
       setTotalPages(Math.ceil(uniqueMovies.length / resultsPerPage))
     };
@@ -90,7 +87,8 @@ function ListMovies() {
                 <img
                 className="movie-image"
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={`poster ${movie.title}`}
+                alt={`Poster ${movie.title}`}
+                title={movie.title}
                 draggable="false"
                 />
             </Link>
