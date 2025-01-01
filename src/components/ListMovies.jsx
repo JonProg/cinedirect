@@ -34,7 +34,7 @@ function ListMovies() {
         }
 
         params.page = currentPage;
-        const response = await axios.get('https://cinedirect-api.vercel.app/api/movies', { params });
+        const response = await axios.get('http://127.0.0.1:4000/api/movies', { params });
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter((movie) => {
@@ -74,6 +74,7 @@ function ListMovies() {
       setTotalPages(Math.ceil(uniqueMovies.length / resultsPerPage))
     };
     fetchMovies(params, page, 20); 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, page]);
 
   if (movies.length < 1){

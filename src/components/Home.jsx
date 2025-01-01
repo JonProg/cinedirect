@@ -15,16 +15,16 @@ function Home(){
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const trendResponse = await axios.get('https://cinedirect-api.vercel.app/api/trending');
-        const topResponse = await axios.get('https://cinedirect-api.vercel.app/api/top');
-        const nextResponse = await axios.get('https://cinedirect-api.vercel.app/api/releases');
+        const trendResponse = await axios.get('http://127.0.0.1:4000/api/trending');
+        const topResponse = await axios.get('http://127.0.0.1:4000/api/top');
+        const nextResponse = await axios.get('http://127.0.0.1:4000/api/releases');
         const currentYear = new Date().getFullYear();
 
         setTopMovies(topResponse.data.results.slice(0, 20));
         setTrendMovies(trendResponse.data.results);
 
         setNextMovies(nextResponse.data.results.filter((movie) => {
-          return new Date(movie.release_date).getFullYear() === currentYear;
+          return  [currentYear, currentYear - 1].includes(new Date(movie.release_date).getFullYear());
         }));
 
         setLoading(false);
