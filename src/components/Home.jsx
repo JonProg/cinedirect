@@ -24,7 +24,7 @@ function Home(){
         setTrendMovies(trendResponse.data.results);
 
         setNextMovies(nextResponse.data.results.filter((movie) => {
-          return  [currentYear, currentYear - 1].includes(new Date(movie.release_date).getFullYear());;
+          return  [currentYear, currentYear - 1].includes(new Date(movie.release_date).getFullYear());
         }));
 
         setLoading(false);

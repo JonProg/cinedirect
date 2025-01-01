@@ -32,7 +32,7 @@ function Movie() {
         };
         fetchMovie();
 
-    }, []); 
+    }, [id, navigate]); 
 
     if (!movie) {
         return (
