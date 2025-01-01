@@ -22,7 +22,6 @@ function Movie() {
                 const movieLinks = await axios.post('http://127.0.0.1:4000/api/valid-links/', {
                     "movieTitle":movieData.title,
                 });
-
                 setMovie(movieData);
                 setLinks(movieLinks.data);
             } catch (error) {
@@ -32,7 +31,7 @@ function Movie() {
         };
         fetchMovie();
 
-    }, []); 
+    }, [id, navigate]); 
 
     if (!movie) {
         return (
