@@ -15,9 +15,9 @@ function Home(){
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const trendResponse = await axios.get('https://cinedirect-api.vercel.app/api/trending');
-        const topResponse = await axios.get('https://cinedirect-api.vercel.app/api/top');
-        const nextResponse = await axios.get('https://cinedirect-api.vercel.app/api/releases');
+        const trendResponse = await axios.get('http://127.0.0.1:4000/api/trending');
+        const topResponse = await axios.get('http://127.0.0.1:4000/api/top');
+        const nextResponse = await axios.get('http://127.0.0.1:4000/api/releases');
         const currentYear = new Date().getFullYear();
 
         setTopMovies(topResponse.data.results.slice(0, 20));
@@ -56,6 +56,7 @@ function Home(){
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
+                loading='lazy'
               />
             </Link>
             <p className="title-movie">
@@ -77,6 +78,7 @@ function Home(){
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
+                loading='lazy'
               />
             </Link>
             <p className="title-movie">
@@ -98,6 +100,7 @@ function Home(){
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
+                loading='lazy'
               />
             </Link>
             <p className="title-movie">
