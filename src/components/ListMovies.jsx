@@ -93,6 +93,7 @@ function ListMovies() {
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={`poster ${movie.title}`}
                 draggable="false"
+                loading='lazy'
                 />
             </Link>
             <Link to={`/movie/${movie.id}`}>

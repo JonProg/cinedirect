@@ -56,6 +56,7 @@ function Home(){
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
+                loading='lazy'
               />
             </Link>
             <p className="title-movie">
@@ -77,6 +78,7 @@ function Home(){
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
+                loading='lazy'
               />
             </Link>
             <p className="title-movie">
@@ -98,6 +100,7 @@ function Home(){
                 src={`${imgURL}w200${movie.poster_path}`}
                 alt={`Poster de ${movie.title}`}
                 draggable="false"
+                loading='lazy'
               />
             </Link>
             <p className="title-movie">
