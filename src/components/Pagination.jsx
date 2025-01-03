@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 
 function Pagination({ numberPage, totalPages, inputValue , genreValue}) {
@@ -46,5 +48,3 @@ function Pagination({ numberPage, totalPages, inputValue , genreValue}) {
         </div>
     );
 }
-
-export default Pagination;

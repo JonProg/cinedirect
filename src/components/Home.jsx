@@ -15,9 +15,9 @@ function Home(){
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const trendResponse = await axios.get('http://127.0.0.1:4000/api/trending');
-        const topResponse = await axios.get('http://127.0.0.1:4000/api/top');
-        const nextResponse = await axios.get('http://127.0.0.1:4000/api/releases');
+        const trendResponse = await axios.get('https://cinedirect-api.vercel.app/api/trending');
+        const topResponse = await axios.get('https://cinedirect-api.vercel.app/api/top');
+        const nextResponse = await axios.get('https://cinedirect-api.vercel.app/api/releases');
         const currentYear = new Date().getFullYear();
 
         setTopMovies(topResponse.data.results.slice(0, 20));
