@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
 import Search from "./Search";
 import Footer from "./Footer";
-import Pagination from "./Pagination";
+import { Pagination } from "./Pagination";
 
 function ListMovies() {
   const navigate = useNavigate();
