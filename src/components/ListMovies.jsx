@@ -28,7 +28,7 @@ function ListMovies() {
       let totalPages = 1;
       const maxPagesToFetch = 10;
 
-      while (movies.length < numberPage * resultsPerPage && currentPage <= totalPages) {
+      while (movies.length < (numberPage * resultsPerPage) + 1 && currentPage <= totalPages) {
         if (currentPage > maxPagesToFetch) {
           break;
         }
@@ -42,6 +42,7 @@ function ListMovies() {
             movie.poster_path !== null &&
             movie.popularity >= 11.7 &&
             movie.vote_average >= 5.4 &&
+            movie.vote_count >= 17 &&
             Number(movie.release_date.slice(0, 4)) >= 1972 &&
             movie.original_language !== "ko" &&
             movie.original_language !== "id" &&
@@ -58,10 +59,11 @@ function ListMovies() {
         movies = movies.concat(filteredMovies);
         currentPage++;
 
-        if (movies.length >= numberPage * resultsPerPage) {
+        if (movies.length >= numberPage * resultsPerPage + 1) {
           break;
         }
       }
+
       const uniqueMovies = Array.from(new Set(movies.map(movie => movie.id)))
         .map(id => {
           return movies.find(movie => movie.id === id);
