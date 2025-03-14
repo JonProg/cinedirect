@@ -40,7 +40,7 @@ function ListMovies() {
         let filteredMovies = response.data.results.filter((movie) => {
           let isValidMovie = (
             movie.poster_path !== null &&
-            movie.popularity >= 11.7 &&
+            movie.popularity >= 3.53 &&
             movie.vote_average >= 5.4 &&
             movie.vote_count >= 17 &&
             Number(movie.release_date.slice(0, 4)) >= 1972 &&
