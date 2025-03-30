@@ -9,7 +9,7 @@ const imgURL = 'https://image.tmdb.org/t/p/';
 
 function Movie() {
     const navigate = useNavigate();
-    const { id } = useParams(); 
+    const { type, id } = useParams(); 
     const [movie, setMovie] = useState(null); 
     const [links, setLinks] = useState(null); 
 
@@ -17,8 +17,11 @@ function Movie() {
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:4000/api/movie/${id}`);
+                const response = await axios.get(`http://127.0.0.1:4000/api/movie/${type}/${id}`);
                 const movieData = response.data;
+                movieData.title = movieData.title || movieData.name
+                movieData.date = movieData.release_date ||  movieData.first_air_date
+
                 const movieLinks = await axios.post('http://127.0.0.1:4000/api/valid-links/', {
                     "movieTitle":movieData.title,
                 });
@@ -31,7 +34,7 @@ function Movie() {
         };
         fetchMovie();
 
-    }, [id, navigate]); 
+    }, [type, id, navigate]); 
 
     if (!movie) {
         return (
@@ -51,7 +54,7 @@ function Movie() {
                     alt={`Poster de ${movie.title}`}
                 />
                 <div className="movie-info">
-                    <h1>{movie.title} ({movie.release_date.slice(0, 4)})</h1>
+                    <h1>{movie.title} ({movie.date.slice(0, 4)})</h1>
                     <p>{movie.overview}</p>
                     <div className='genre'>
                         {movie.genres.map((genre) => (

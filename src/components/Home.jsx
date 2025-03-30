@@ -50,7 +50,7 @@ function Home(){
       <div className="wrapper">
         {trendMovies.map((movie) => (
           <div className="movie-item" key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>
+            <Link to={`/players/${movie.media_type}/${movie.id}`}>
               <img
                 className="movie-image"
                 src={`${imgURL}w200${movie.poster_path}`}
@@ -72,7 +72,7 @@ function Home(){
       <div className="wrapper">
         {topMovies.map((movie) => (
           <div className="movie-item" key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>
+            <Link to={`/players/${movie.media_type}/${movie.id}`}>
               <img
                 className="movie-image"
                 src={`${imgURL}w200${movie.poster_path}`}
@@ -94,7 +94,7 @@ function Home(){
       <div className="wrapper">
         {nextMovies.map((movie) => (
           <div className="movie-item" key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>
+            <Link to={`/players/${movie.media_type}/${movie.id}`}>
               <img
                 className="movie-image"
                 src={`${imgURL}w200${movie.poster_path}`}

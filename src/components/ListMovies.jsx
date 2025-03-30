@@ -38,12 +38,15 @@ function ListMovies() {
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter((movie) => {
+          movie.title = movie.title || movie.name
+          movie.date = movie.release_date ||  movie.first_air_date
+
           let isValidMovie = (
             movie.poster_path !== null &&
             movie.popularity >= 3.53 &&
             movie.vote_average >= 5.4 &&
             movie.vote_count >= 17 &&
-            Number(movie.release_date.slice(0, 4)) >= 1972 &&
+            Number(movie.date.slice(0, 4)) >= 1972  &&
             movie.original_language !== "ko" &&
             movie.original_language !== "id" &&
             movie.original_language !== "cn" 
@@ -55,9 +58,6 @@ function ListMovies() {
 
           return isValidMovie;
         });
-
-        console.log(totalPages)
-        console.log(filteredMovies)
         
         movies = movies.concat(filteredMovies);
         currentPage++;
@@ -71,8 +71,6 @@ function ListMovies() {
         .map(id => {
           return movies.find(movie => movie.id === id);
       });
-
-      console.log(uniqueMovies.length)
 
       setMovies(uniqueMovies.slice((numberPage - 1) * resultsPerPage, numberPage * resultsPerPage));
       setTotalPages(Math.ceil(uniqueMovies.length / resultsPerPage))
@@ -91,7 +89,7 @@ function ListMovies() {
         <div className="grid-movies">
         {movies.map((movie) => (
             <div className="movie-item" key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>
+            <Link to={`/players/${movie.media_type}/${movie.id}`}>
                 <img
                 className="movie-image"
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -100,7 +98,7 @@ function ListMovies() {
                 loading='lazy'
                 />
             </Link>
-            <Link to={`/movie/${movie.id}`}>
+            <Link to={`/players/${movie.media_type}/${movie.id}`}>
             <p className="title-movie">
                 {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
             </p>
