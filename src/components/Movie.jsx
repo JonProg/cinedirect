@@ -9,7 +9,7 @@ const imgURL = 'https://image.tmdb.org/t/p/';
 
 function Movie() {
     const navigate = useNavigate();
-    const { id } = useParams(); 
+    const { type, id } = useParams(); 
     const [movie, setMovie] = useState(null); 
     const [links, setLinks] = useState(null); 
 
@@ -21,6 +21,7 @@ function Movie() {
                 const movieData = response.data;
                 const movieLinks = await axios.post('https://cinedirect-api.vercel.app/api/valid-links/', {
                     "movieTitle":movieData.title,
+                    "type":`${type}`
                 });
                 setMovie(movieData);
                 setLinks(movieLinks.data);
@@ -31,7 +32,7 @@ function Movie() {
         };
         fetchMovie();
 
-    }, [id, navigate]); 
+    }, [id, type, navigate]); 
 
     if (!movie) {
         return (
