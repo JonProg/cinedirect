@@ -38,15 +38,12 @@ function ListMovies() {
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter((movie) => {
-          movie.title = movie.title || movie.name
-          movie.date = movie.release_date ||  movie.first_air_date
-
           let isValidMovie = (
             movie.poster_path !== null &&
             movie.popularity >= 3.53 &&
             movie.vote_average >= 5.4 &&
             movie.vote_count >= 17 &&
-            Number(movie.date.slice(0, 4)) >= 1972  &&
+            Number(movie.release_date.slice(0, 4)) >= 1972 &&
             movie.original_language !== "ko" &&
             movie.original_language !== "id" &&
             movie.original_language !== "cn" 
