@@ -17,7 +17,7 @@ function Movie() {
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const response = await axios.get(`https://cinedirect-api.vercel.app/api/movie/${id}`);
+                const response = await axios.get(`https://cinedirect-api.vercel.app/api/movie/${type}/${id}`);
                 const movieData = response.data;
                 const movieLinks = await axios.post('https://cinedirect-api.vercel.app/api/valid-links/', {
                     "movieTitle":movieData.title,
