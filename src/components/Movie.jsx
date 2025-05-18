@@ -9,8 +9,7 @@ const imgURL = 'https://image.tmdb.org/t/p/';
 
 function Movie() {
     const navigate = useNavigate();
-    const { type, id } = useParams(); 
-    const { type, id } = useParams(); 
+    const { type, id } = useParams();
     const [movie, setMovie] = useState(null); 
     const [links, setLinks] = useState(null); 
 
