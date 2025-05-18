@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FourSquare } from "react-loading-indicators";
 import Search from './Search';
-import Footer from './Footer';
 import axios from 'axios';
 
 const imgURL = 'https://image.tmdb.org/t/p/';
@@ -99,7 +98,6 @@ function Movie() {
                     <p>Nenhum link para o filme escolhido</p>
                 )}
             </div>
-            <Footer />
         </>
     );
 }

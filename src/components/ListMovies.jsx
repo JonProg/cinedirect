@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
 import Search from "./Search";
-import Footer from "./Footer";
 import { Pagination } from "./Pagination";
 
 function ListMovies() {
@@ -113,7 +112,6 @@ function ListMovies() {
         inputValue={query}
         genreValue={genre}
         />
-        <Footer />
     </>
     );
 }
