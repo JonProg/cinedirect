@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import Footer from './Footer';
 
 const imgURL = 'https://image.tmdb.org/t/p/';
 
@@ -108,6 +109,7 @@ function Home(){
           </div>
         ))}
       </div>
+      <Footer />
     </>
   );
 }
