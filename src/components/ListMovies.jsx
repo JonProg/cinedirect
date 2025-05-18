@@ -36,6 +36,7 @@ function ListMovies() {
         params.page = currentPage;
         const response = await axios.get('https://cinedirect-api.vercel.app/api/movies', { params });
         totalPages = response.data.total_pages;
+        console.log(response.data)
 
         let filteredMovies = response.data.results.filter((movie) => {
           movie.title = movie.title || movie.name
