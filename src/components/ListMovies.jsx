@@ -35,6 +35,7 @@ function ListMovies() {
 
         params.page = currentPage;
         const response = await axios.get('http://127.0.0.1:4000/api/movies', { params });
+        console.log(response.data)
         totalPages = response.data.total_pages;
 
         let filteredMovies = response.data.results.filter((movie) => {
