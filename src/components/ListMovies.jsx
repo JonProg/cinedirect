@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
 import Search from "./Search";
 import Footer from "./Footer";
-import Pagination from "./Pagination";
+import { Pagination } from "./Pagination";
 
 function ListMovies() {
   const navigate = useNavigate();
@@ -35,8 +35,8 @@ function ListMovies() {
 
         params.page = currentPage;
         const response = await axios.get('http://127.0.0.1:4000/api/movies', { params });
-        console.log(response.data)
         totalPages = response.data.total_pages;
+        console.log(response.data)
 
         let filteredMovies = response.data.results.filter((movie) => {
           movie.title = movie.title || movie.name
@@ -94,7 +94,8 @@ function ListMovies() {
                 <img
                 className="movie-image"
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={`poster ${movie.title}`}
+                alt={`Poster ${movie.title}`}
+                title={movie.title}
                 draggable="false"
                 loading='lazy'
                 />
