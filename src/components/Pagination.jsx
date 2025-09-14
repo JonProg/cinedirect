@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-function Pagination({ numberPage, totalPages, inputValue , genreValue}) {
+export function Pagination({ numberPage, totalPages, inputValue , genreValue}) {
 
     const navigate = useNavigate();
 
