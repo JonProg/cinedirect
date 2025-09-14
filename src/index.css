@@ -257,7 +257,7 @@ body .link-hover:hover{
     text-align: center;
     color: #eeeeee;
     font-size: 1.8rem;
-    margin-top: 2.7rem;
+    margin: 2.7rem 0;
 }
 
 #movie-links p{
