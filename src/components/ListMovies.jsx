@@ -20,6 +20,13 @@ function ListMovies() {
     page
   }
 
+  function normalizeText(text) {
+    return text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
   useEffect(() => {
     const fetchMovies = async (params, numberPage, resultsPerPage) => {
       let movies = [];
@@ -53,7 +60,7 @@ function ListMovies() {
           );
 
           if(query){
-            isValidMovie = isValidMovie && movie.title.toLowerCase().includes(query.toLowerCase());
+            isValidMovie = isValidMovie && normalizeText(movie.title).includes(normalizeText(query));
           }
 
           return isValidMovie;
