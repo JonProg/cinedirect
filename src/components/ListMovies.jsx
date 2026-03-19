@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
 import Search from "./Search";
-import Footer from "./Footer";
 import { Pagination } from "./Pagination";
 
 function ListMovies() {
@@ -19,6 +18,13 @@ function ListMovies() {
     query,
     genre,
     page
+  }
+
+  function normalizeText(text) {
+    return text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
   }
 
   useEffect(() => {
@@ -54,7 +60,7 @@ function ListMovies() {
           );
 
           if(query){
-            isValidMovie = isValidMovie && movie.title.toLowerCase().includes(query.toLowerCase());
+            isValidMovie = isValidMovie && normalizeText(movie.title).includes(normalizeText(query));
           }
 
           return isValidMovie;
@@ -114,7 +120,6 @@ function ListMovies() {
         inputValue={query}
         genreValue={genre}
         />
-        <Footer />
     </>
     );
 }

@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 
 export function Pagination({ numberPage, totalPages, inputValue , genreValue}) {
