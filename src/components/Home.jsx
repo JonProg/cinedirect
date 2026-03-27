@@ -9,18 +9,21 @@ function Home(){
   const [topMovies, setTopMovies] = useState();
   const [trendMovies, setTrendMovies] = useState();
   const [nextMovies, setNextMovies] = useState();
+  const [popularSeries, setPopularSeries] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const trendResponse = await axios.get('https://cinedirect-api.vercel.app/api/trending');
-        const topResponse = await axios.get('https://cinedirect-api.vercel.app/api/top');
-        const nextResponse = await axios.get('https://cinedirect-api.vercel.app/api/releases');
+        const trendResponse = await axios.get('http://127.0.0.1:4000/api/trending');
+        const topResponse = await axios.get('http://127.0.0.1:4000/api/top');
+        const nextResponse = await axios.get('http://127.0.0.1:4000/api/releases');
+        const seriesResponse = await axios.get('http://127.0.0.1:4000/api/series/popular');
         const currentYear = new Date().getFullYear();
 
         setTopMovies(topResponse.data.results.slice(0, 20));
         setTrendMovies(trendResponse.data.results);
+        setPopularSeries(seriesResponse.data.results);
 
         setNextMovies(nextResponse.data.results.filter((movie) => {
           return  [currentYear, currentYear - 1].includes(new Date(movie.release_date).getFullYear());
@@ -60,6 +63,31 @@ function Home(){
             </Link>
             <p className="title-movie">
               {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <header>
+        <h2>| Séries Populares</h2>
+      </header>
+
+      <div className="wrapper">
+        {popularSeries.map((serie) => (
+          <div className="movie-item" key={serie.id}>
+            <Link to={`/players/tv/${serie.id}`}>
+              <img
+                className="movie-image"
+                src={`${imgURL}w200${serie.poster_path}`}
+                alt={`Poster de ${serie.name}`}
+                draggable="false"
+                loading="lazy"
+              />
+            </Link>
+            <p className="title-movie">
+              {serie.name.length < 20
+                ? serie.name
+                : `${serie.name.slice(0, 17)}...`}
             </p>
           </div>
         ))}
