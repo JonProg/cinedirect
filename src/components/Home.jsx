@@ -6,32 +6,51 @@ import Search from './Search';
 const imgURL = 'https://image.tmdb.org/t/p/';
 
 function Home(){
-  const [topMovies, setTopMovies] = useState();
-  const [trendMovies, setTrendMovies] = useState();
-  const [nextMovies, setNextMovies] = useState();
-  const [popularSeries, setPopularSeries] = useState();
+  const [topMovies, setTopMovies] = useState([]);
+  const [trendMovies, setTrendMovies] = useState([]);
+  const [nextMovies, setNextMovies] = useState([]);
+  const [popularSeries, setPopularSeries] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const trendResponse = await axios.get('http://127.0.0.1:4000/api/trending');
-        const topResponse = await axios.get('http://127.0.0.1:4000/api/top');
-        const nextResponse = await axios.get('http://127.0.0.1:4000/api/releases');
-        const seriesResponse = await axios.get('http://127.0.0.1:4000/api/series/popular');
         const currentYear = new Date().getFullYear();
 
-        setTopMovies(topResponse.data.results.slice(0, 20));
-        setTrendMovies(trendResponse.data.results);
-        setPopularSeries(seriesResponse.data.results);
+        const responses = await Promise.allSettled([
+          axios.get('http://localhost:4000/api/trending'),
+          axios.get('http://localhost:4000/api/top'),
+          axios.get('http://localhost:4000/api/releases'),
+          axios.get('http://localhost:4000/api/series/popular')
+        ]);
 
-        setNextMovies(nextResponse.data.results.filter((movie) => {
-          return  [currentYear, currentYear - 1].includes(new Date(movie.release_date).getFullYear());
-        }));
+        const [trend, top, releases, series] = responses;
 
-        setLoading(false);
+        if (trend.status === 'fulfilled') {
+          setTrendMovies(trend.value.data.results || []);
+        }
+
+        if (top.status === 'fulfilled') {
+          setTopMovies(top.value.data.results?.slice(0, 20) || []);
+        }
+
+        if (series.status === 'fulfilled') {
+          setPopularSeries(series.value.data.results || []);
+        }
+
+        if (releases.status === 'fulfilled') {
+          setNextMovies(
+            (releases.value.data.results || []).filter((movie) => {
+              return [currentYear, currentYear - 1].includes(
+                new Date(movie.release_date).getFullYear()
+              );
+            })
+          );
+        }
+
       } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.error(error);
+      } finally {
         setLoading(false);
       }
     };
