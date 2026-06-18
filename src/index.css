@@ -178,17 +178,18 @@ body .link-hover:hover{
 #title-web{
     text-decoration: none; 
     color: rgb(240, 240, 240);
-    font-size:5rem;
+    font-size:3.5rem;
     font-weight: 400;
     padding-bottom: 1rem;   
 }
 
 .search{
     display: flex;
+    justify-content: space-between;
     justify-items: center;
     align-items: center;
-    flex-direction: column;
-    margin: 4rem auto;
+    flex-direction:  row;
+    margin: 1rem auto;
     padding: 2.3rem;
     min-width: 30rem;
 }
@@ -203,13 +204,14 @@ body .link-hover:hover{
     align-items: center;
     border-radius: 0.5rem;
     background-color: rgb(241, 241, 241);
+    padding: 0 0.7rem;
 }
 
 #input-group input{
     border: none;
     background-color: transparent;
     padding: 1rem;
-    width: 43rem;
+    width: 35rem;
     height: 4rem;
 }
 
