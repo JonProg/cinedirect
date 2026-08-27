@@ -1,11 +1,79 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from './Search';
 
 const imgURL = 'https://image.tmdb.org/t/p/';
 
-function Home(){
+function Row({ title, items, mediaTypeFallback }) {
+  const rowRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (!rowRef.current) return;
+    const { clientWidth } = rowRef.current;
+    rowRef.current.scrollBy({
+      left: direction === 'left' ? -clientWidth * 0.8 : clientWidth * 0.8,
+      behavior: 'smooth',
+    });
+  };
+
+  if (!items || items.length === 0) return null;
+
+  return (
+    <section className="row-section">
+      <h2 className="row-title">{title}</h2>
+
+      <div className="row-wrapper">
+        <button className="row-arrow left" onClick={() => scroll('left')} aria-label="Voltar">
+          <i className="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div className="row-track" ref={rowRef}>
+          {items.map((item) => {
+            const name = item.title || item.name;
+            const mediaType = item.media_type || mediaTypeFallback;
+            return (
+              <Link
+                to={`/players/${mediaType}/${item.id}`}
+                className="movie-item"
+                key={item.id}
+              >
+                <div className="poster-frame">
+                  <img
+                    className="movie-image"
+                    src={`${imgURL}w300${item.poster_path}`}
+                    alt={`Poster de ${name}`}
+                    draggable="false"
+                    loading="lazy"
+                  />
+                  {typeof item.vote_average === 'number' && item.vote_average > 0 && (
+                    <span className="card-rating">
+                      <i className="fa-solid fa-star"></i> {item.vote_average.toFixed(1)}
+                    </span>
+                  )}
+                  <div className="poster-hover">
+                    <span className="play-circle">
+                      <i className="fa-solid fa-play"></i>
+                    </span>
+                  </div>
+                </div>
+                <p className="title-movie">
+                  {name.length < 22 ? name : `${name.slice(0, 19)}...`}
+                </p>
+              </Link>
+            );
+          })}
+        </div>
+
+        <button className="row-arrow right" onClick={() => scroll('right')} aria-label="Avançar">
+          <i className="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function Home() {
   const [topMovies, setTopMovies] = useState([]);
   const [trendMovies, setTrendMovies] = useState([]);
   const [nextMovies, setNextMovies] = useState([]);
@@ -18,10 +86,10 @@ function Home(){
         const currentYear = new Date().getFullYear();
 
         const responses = await Promise.allSettled([
-          axios.get('https://cinedirect-api.vercel.app/api/trending'),
-          axios.get('https://cinedirect-api.vercel.app/api/top'),
-          axios.get('https://cinedirect-api.vercel.app/api/releases'),
-          axios.get('https://cinedirect-api.vercel.app/api/series/popular')
+          axios.get('http://localhost:4000/api/trending'),
+          axios.get('http://localhost:4000/api/top'),
+          axios.get('http://localhost:4000/api/releases'),
+          axios.get('http://localhost:4000/api/series/popular'),
         ]);
 
         const [trend, top, releases, series] = responses;
@@ -47,7 +115,6 @@ function Home(){
             })
           );
         }
-
       } catch (error) {
         console.error(error);
       } finally {
@@ -59,101 +126,52 @@ function Home(){
   }, []);
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="home-loading">
+        <p>Carregando...</p>
+      </div>
+    );
   }
+
+  const heroMovie = trendMovies[0];
 
   return (
     <>
       <Search />
-      <header>
-        <h2>| Destaques</h2>
-      </header>
-      <div className="wrapper">
-        {trendMovies.map((movie) => (
-          <div className="movie-item" key={movie.id}>
-            <Link to={`/players/${movie.media_type}/${movie.id}`}>
-              <img
-                className="movie-image"
-                src={`${imgURL}w200${movie.poster_path}`}
-                alt={`Poster de ${movie.title}`}
-                draggable="false"
-                loading='lazy'
-              />
-            </Link>
-            <p className="title-movie">
-              {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
-            </p>
-          </div>
-        ))}
-      </div>
 
-      <header>
-        <h2>| Séries Populares</h2>
-      </header>
+      {heroMovie && (
+        <div className="hero-banner">
+          <div className="hero-backdrop">
+            <img
+              src={`${imgURL}w1280${heroMovie.backdrop_path}`}
+              alt={`Destaque: ${heroMovie.title}`}
+            />
+            <div className="hero-overlay" />
+          </div>
 
-      <div className="wrapper">
-        {popularSeries.map((serie) => (
-          <div className="movie-item" key={serie.id}>
-            <Link to={`/players/tv/${serie.id}`}>
-              <img
-                className="movie-image"
-                src={`${imgURL}w200${serie.poster_path}`}
-                alt={`Poster de ${serie.name}`}
-                draggable="false"
-                loading="lazy"
-              />
-            </Link>
-            <p className="title-movie">
-              {serie.name.length < 20
-                ? serie.name
-                : `${serie.name.slice(0, 17)}...`}
+          <div className="hero-content">
+            <span className="hero-tag">Em alta</span>
+            <h1>{heroMovie.title}</h1>
+            <p className="hero-overview">
+              {heroMovie.overview?.length > 220
+                ? `${heroMovie.overview.slice(0, 220)}...`
+                : heroMovie.overview}
             </p>
+            <Link
+              to={`/players/${heroMovie.media_type || 'movie'}/${heroMovie.id}`}
+              className="hero-button"
+            >
+              <i className="fa-solid fa-play"></i> Assistir agora
+            </Link>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
-      <header>
-        <h2>| TOP 20</h2>
-      </header>
-      <div className="wrapper">
-        {topMovies.map((movie) => (
-          <div className="movie-item" key={movie.id}>
-            <Link to={`/players/${movie.media_type}/${movie.id}`}>
-              <img
-                className="movie-image"
-                src={`${imgURL}w200${movie.poster_path}`}
-                alt={`Poster de ${movie.title}`}
-                draggable="false"
-                loading='lazy'
-              />
-            </Link>
-            <p className="title-movie">
-              {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
-            </p>
-          </div>
-        ))}
-      </div>
-      
-      <header>
-        <h2>| Lançamentos</h2>
-      </header>
-      <div className="wrapper">
-        {nextMovies.map((movie) => (
-          <div className="movie-item" key={movie.id}>
-            <Link to={`/players/${movie.media_type}/${movie.id}`}>
-              <img
-                className="movie-image"
-                src={`${imgURL}w200${movie.poster_path}`}
-                alt={`Poster de ${movie.title}`}
-                draggable="false"
-                loading='lazy'
-              />
-            </Link>
-            <p className="title-movie">
-              {movie.title.length < 20 ? movie.title : `${movie.title.slice(0, 17)}...`}
-            </p>
-          </div>
-        ))}
+      <div className="rows-container">
+        <Row title="Destaques" items={trendMovies} mediaTypeFallback="movie" />
+        <Row title="Séries Populares" items={popularSeries} mediaTypeFallback="tv" />
+        <Row title="TOP 20" items={topMovies} mediaTypeFallback="movie" />
+        <Row title="Lançamentos" items={nextMovies} mediaTypeFallback="movie" />
       </div>
     </>
   );

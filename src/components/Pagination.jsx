@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 
-export function Pagination({ numberPage, totalPages, inputValue , genreValue}) {
-
+export function Pagination({ numberPage, totalPages, inputValue, genreValue }) {
     const navigate = useNavigate();
+    const current = Number(numberPage);
 
     const goToPage = (page) => {
         const query = new URLSearchParams();
@@ -13,36 +13,62 @@ export function Pagination({ numberPage, totalPages, inputValue , genreValue}) {
         navigate(`/search?${query.toString()}`);
     };
 
+    const getPageNumbers = () => {
+        const pages = [];
+        const delta = 1;
+
+        for (let i = 1; i <= totalPages; i++) {
+            if (
+                i === 1 ||
+                i === totalPages ||
+                (i >= current - delta && i <= current + delta)
+            ) {
+                pages.push(i);
+            } else if (pages[pages.length - 1] !== "...") {
+                pages.push("...");
+            }
+        }
+
+        return pages;
+    };
+
+    if (totalPages <= 1) return null;
+
     return (
         <div className="pagination">
-            {numberPage > 1 && (
-                <button
-                    onClick={() => goToPage(Number(numberPage) - 1)}
-                    className='page-item'
-                >
-                    <i className="fa-solid fa-arrow-left"></i>
-                </button>
-            )}
-            {Array.from({ length: totalPages }, (_, i) => {
-                const page = i + 1; // Começa da página 1, porque o índice começa em 0
-                return (
-                    <button 
-                        key={page} 
-                        onClick={() => goToPage(page)} 
-                        className={`page-item ${Number(numberPage) === page ? 'active' : ''}`}
+            <button
+                onClick={() => goToPage(current - 1)}
+                className="page-item nav-item"
+                disabled={current <= 1}
+                aria-label="Página anterior"
+            >
+                <i className="fa-solid fa-chevron-left"></i>
+            </button>
+
+            {getPageNumbers().map((page, index) =>
+                page === "..." ? (
+                    <span key={`dots-${index}`} className="page-dots">
+                        ...
+                    </span>
+                ) : (
+                    <button
+                        key={page}
+                        onClick={() => goToPage(page)}
+                        className={`page-item ${current === page ? "active" : ""}`}
                     >
                         {page}
                     </button>
-                );
-            })}
-            {numberPage < totalPages && (
-                <button
-                    onClick={() => goToPage(Number(numberPage) + 1)}
-                    className='page-item'
-                >
-                    <i className="fa-solid fa-arrow-right"></i>
-                </button>
+                )
             )}
+
+            <button
+                onClick={() => goToPage(current + 1)}
+                className="page-item nav-item"
+                disabled={current >= totalPages}
+                aria-label="Próxima página"
+            >
+                <i className="fa-solid fa-chevron-right"></i>
+            </button>
         </div>
     );
 }

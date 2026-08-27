@@ -9,93 +9,116 @@ const imgURL = 'https://image.tmdb.org/t/p/';
 function Movie() {
     const navigate = useNavigate();
     const { type, id } = useParams();
-    const [movie, setMovie] = useState(null); 
-    const [links, setLinks] = useState(null); 
-
+    const [movie, setMovie] = useState(null);
+    const [links, setLinks] = useState(null);
 
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const response = await axios.get(`https://cinedirect-api.vercel.app/api/movie/${type}/${id}`);
+                const response = await axios.get(`http://localhost:4000/api/movie/${type}/${id}`);
                 const movieData = response.data;
-                
-                movieData.title = movieData.title || movieData.name
-                movieData.date = movieData.release_date ||  movieData.first_air_date
 
-                const movieLinks = await axios.post('https://cinedirect-api.vercel.app/api/valid-links/', {
-                    "movieTitle":movieData.title,
-                    "type":`${type}`
+                movieData.title = movieData.title || movieData.name;
+                movieData.date = movieData.release_date || movieData.first_air_date;
+
+                const movieLinks = await axios.post('http://localhost:4000/api/valid-links/', {
+                    "movieTitle": movieData.title,
+                    "type": `${type}`
                 });
                 setMovie(movieData);
                 setLinks(movieLinks.data);
             } catch (error) {
                 console.error('Erro ao fazer a requisição GET:', error);
-                navigate('/'); 
+                navigate('/');
             }
         };
         fetchMovie();
-
-    }, [type, id,  navigate]); 
+    }, [type, id, navigate]);
 
     if (!movie) {
         return (
             <div className="loading-container">
-                <FourSquare color="white" size="medium" text="" textColor="" />; 
+                <FourSquare color="white" size="medium" text="" textColor="" />
             </div>
-        )
+        );
     }
 
     return (
         <>
             <Search />
-            <div className="movie-details">
-                <img
-                    src={`${imgURL}w200${movie.poster_path}`}
-                    loading="lazy"
-                    alt={`Poster de ${movie.title}`}
-                />
-                <div className="movie-info">
-                    <h1>{movie.title} ({movie.date.slice(0, 4)})</h1>
-                    <p>{movie.overview}</p>
-                    <div className='genre'>
-                        {movie.genres.map((genre) => (
-                            <Link
-                                key={genre.id}
-                                className="link-hover"
-                                to={`/search?genre=${genre.id}`}
-                            >
-                                {genre.name}
-                            </Link>
-                        ))}
+
+            <div className="movie-hero">
+                <div className="movie-hero-backdrop">
+                    <img
+                        src={movie.backdrop_path ? `${imgURL}w1280${movie.backdrop_path}` : ''}
+                        alt={`Imagem de fundo de ${movie.title}`}
+                        loading="lazy"
+                    />
+                    <div className="movie-hero-overlay" />
+                </div>
+
+                <div className="movie-details">
+                    <img
+                        className="movie-poster"
+                        src={movie.poster_path ? `${imgURL}w342${movie.poster_path}` : '/placeholder.png'}
+                        loading="lazy"
+                        alt={`Poster de ${movie.title}`}
+                    />
+
+                    <div className="movie-info">
+                        <h1>{movie.title}</h1>
+
+                        <div className="movie-meta">
+                            {movie.date && (
+                                <span className="meta-badge">
+                                    {movie.date.slice(0, 4)}
+                                </span>
+                            )}
+                            {typeof movie.vote_average === 'number' && (
+                                <span className="meta-badge rating">
+                                    <i className="fa-solid fa-star"></i> {movie.vote_average.toFixed(1)}
+                                </span>
+                            )}
+                            {movie.runtime && (
+                                <span className="meta-badge">{movie.runtime} min</span>
+                            )}
+                        </div>
+
+                        <div className="genre">
+                            {movie.genres.map((genre) => (
+                                <Link
+                                    key={genre.id}
+                                    className="genre-pill"
+                                    to={`/search?genre=${genre.id}`}
+                                >
+                                    {genre.name}
+                                </Link>
+                            ))}
+                        </div>
+
+                        <p className="movie-overview">{movie.overview}</p>
                     </div>
                 </div>
             </div>
 
-            <img
-                src={`${imgURL}w500${movie.backdrop_path}`}
-                id="backdrop-movie"
-                loading="lazy"
-                alt={`Imagem de fundo de ${movie.title}`}
-            />
-
             <div id="movie-links">
-                <h1>Links para o filme:</h1>
+                <h2>Links para assistir</h2>
                 {links && Object.keys(links).length > 0 ? (
                     <div className="link-container">
                         {Object.entries(links).map(([linkName, linkUrl]) => (
                             <a
                                 key={linkName}
-                                className="link-hover"
+                                className="link-card"
                                 href={linkUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                {linkName}
+                                <i className="fa-solid fa-play">{linkName}</i>
                             </a>
                         ))}
                     </div>
                 ) : (
-                    <p>Nenhum link para o filme escolhido</p>
+                    <p className="no-links">Nenhum link disponível para este título</p>
                 )}
             </div>
         </>

@@ -40,7 +40,7 @@ function ListMovies() {
         }
 
         params.page = currentPage;
-        const response = await axios.get('https://cinedirect-api.vercel.app/api/movies', { params });
+        const response = await axios.get('http://localhost:4000/api/movies', { params });
         totalPages = response.data.total_pages;
         console.log(response.data)
 
