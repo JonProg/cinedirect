@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { FourSquare } from "react-loading-indicators";
 import Search from './Search';
 import axios from 'axios';
 
@@ -37,8 +36,8 @@ function Movie() {
 
     if (!movie) {
         return (
-            <div className="loading-container">
-                <FourSquare color="white" size="medium" text="" textColor="" />
+            <div className="home-loading">
+                <p>Carregando...</p>
             </div>
         );
     }
