@@ -15,13 +15,13 @@ function Movie() {
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/movie/${type}/${id}`);
+                const response = await axios.get(`https://cinedirect-api.vercel.app/api/movie/${type}/${id}`);
                 const movieData = response.data;
 
                 movieData.title = movieData.title || movieData.name;
                 movieData.date = movieData.release_date || movieData.first_air_date;
 
-                const movieLinks = await axios.post('http://localhost:4000/api/valid-links/', {
+                const movieLinks = await axios.post('https://cinedirect-api.vercel.app/api/valid-links/', {
                     "movieTitle": movieData.title,
                     "type": `${type}`
                 });

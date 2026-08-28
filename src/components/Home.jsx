@@ -86,10 +86,10 @@ function Home() {
         const currentYear = new Date().getFullYear();
 
         const responses = await Promise.allSettled([
-          axios.get('http://localhost:4000/api/trending'),
-          axios.get('http://localhost:4000/api/top'),
-          axios.get('http://localhost:4000/api/releases'),
-          axios.get('http://localhost:4000/api/series/popular'),
+          axios.get('https://cinedirect-api.vercel.app/api/trending'),
+          axios.get('https://cinedirect-api.vercel.app/api/top'),
+          axios.get('https://cinedirect-api.vercel.app/api/releases'),
+          axios.get('https://cinedirect-api.vercel.app/api/series/popular'),
         ]);
 
         const [trend, top, releases, series] = responses;
